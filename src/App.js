@@ -12,12 +12,14 @@ import User_profile from './pages/User_profile'
 import Provider_profile from './pages/Provider_profile'
 import ProfileP from './pages/ProfileP'
 import { useState } from 'react';
-
-
+import AuthRoutes from './component/AuthRoutes'
+import UpdateAppo from './pages/UpdateAppointment';
 
 
 function App() {
   const [category, setCategory] = useState('');
+  const [user, setUser] = useState(null);
+
 
 
   return (
@@ -25,16 +27,21 @@ function App() {
       <div className='BG'>
         <BrowserRouter>
           <Routes>
+            <Route element={<AuthRoutes setUser={setUser}/>}>
+
+
+            </Route>
+            <Route path='/userAppointment' element={<UserAppointment />} />
+            <Route path='/updateAppointment' element={<UpdateAppo />} />
+            <Route path='/bookAppointment' element={<Appointment />} />
+            <Route path='/providerAppointment' element={<ProviderAppointment />} />
             <Route path='/Login' element={<Login />} />
             <Route path='/Register' element={<Register />} />
-            <Route path='/bookAppointment' element={<Appointment />} />
-            <Route path='/userAppointment' element={<UserAppointment />} />
-            <Route path='/providerAppointment' element={<ProviderAppointment />} />
-            <Route path='/home' element={<Home setCategory={setCategory}  />} />
+            <Route path='/home' element={<Home setCategory={setCategory} />} />
             <Route path="*" element={<NotFound />} />
-            <Route path='/User_profile' element={<User_profile />}/>
-            <Route path='/Provider_profile' element={<Provider_profile />}/>
-           <Route path='/profilep' element={<ProfileP />}/>
+            <Route path='/User_profile' element={<User_profile />} />
+            <Route path='/Provider_profile' element={<Provider_profile />} />
+            <Route path='/profilep' element={<ProfileP />} />
             {/* <Route path='/register' element={<Register />} /> */}
             {/* <Route element={<AuthRoute setUser={setUser} />}>
         <Route path='/' element={<Dashboard />} />

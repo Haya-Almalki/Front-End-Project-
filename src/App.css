@@ -1,7 +1,7 @@
 
 .BG {
     background-image: url("./images/bg.svg") ;
-    background-repeat: repeat-y;
+    background-repeat: repeat-x;
     background-position: top 125px right 300px ;
   }
 

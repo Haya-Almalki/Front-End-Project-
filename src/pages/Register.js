@@ -1,7 +1,214 @@
-import { Input,Box,InputGroup,InputLeftAddon,HStack,Flex,VStack,Text,Button,Toast, useToast, Link ,TabList,Tab,Tabs,TabPanel,TabPanels,Select} from '@chakra-ui/react'
-import { useState } from 'react';
+import { Input,Box,InputGroup,InputLeftAddon,HStack,Flex,
+  VStack,Text,Button,Toast, useToast, Link 
+  ,TabList,Tab,Tabs,TabPanel,TabPanels,Select} from '@chakra-ui/react'
+import { useState,useEffect } from 'react';
+import {useNavigate } from 'react-router-dom';
+
 
 const Register =()=>{
+  const navigate = useNavigate();
+  const toast=useToast();
+
+
+
+
+  //user
+  const [username, setUsername] = useState('');
+  const usernameChange = (event) => setUsername(event.target.value)
+  const [password, setPassword] = useState('');
+  const passwordChange = (event) => setPassword(event.target.value)
+  const [email, setEmail] = useState('');
+  const emailChange = (event) => setEmail(event.target.value)
+  const [confirmPassword, setconfirmPassword] = useState('');
+  const confirmPasswordChange = (event) => setconfirmPassword(event.target.value)
+  const [city, setCity] = useState('');
+  const cityChange = (event) => setCity(event.target.value)
+  const role="USER";
+
+
+  //provider
+  const [username1, setUsername1] = useState('');
+  const usernameChange1 = (event) => setUsername1(event.target.value)
+  const [password1, setPassword1] = useState('');
+  const passwordChange1 = (event) => setPassword1(event.target.value)
+  const [email1, setEmail1] = useState('');
+  const emailChange1 = (event) => setEmail1(event.target.value)
+  const [confirmPassword1, setconfirmPassword1] = useState('');
+  const confirmPasswordChange1 = (event) => setconfirmPassword1(event.target.value)
+  const [city1, setCity1] = useState('');
+  const cityChange1 = (event) => setCity1(event.target.value)
+
+
+  const [description, setDescription] = useState('');
+  const descriptionChange = (event) => setDescription(event.target.value)
+  const [skills, setSkills] = useState('');
+  const skillsChange = (event) => setSkills(event.target.value)
+  const [category, setCategory] = useState('');
+  const categoryChange = (event) => setCategory(event.target.value)
+  const [price, setPrice] = useState('');
+  const priceChange = (event) => setPrice(event.target.value)
+
+  const role1="PERSON";
+
+
+
+    
+  const formSubmitUser=async ()=>{
+    if(username==""||password==""|email==""|city==""){
+      toast({
+        title: 'Error',
+        description: 'Please complete all fields',
+        status: 'error',
+        duration: 5000,
+        isClosable: false,
+        position: 'top',
+      });
+      return;}
+      if(password!=confirmPassword){
+        toast({
+          title: 'Error',
+          description: 'confirmPassword does not match password',
+          status: 'error',
+          duration: 5000,
+          isClosable: false,
+          position: 'top',
+        });
+        return;
+    }
+    const bodyValue = {
+      username,
+      password,
+      email,
+      city,
+      role
+    };
+
+    try {
+      const request = await fetch('/api/v1/user/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bodyValue),
+      });
+
+      const data = await request.json();
+
+      if (request.status === 201) {
+        toast({
+          title: 'registered successfully.',
+          description: data.message,
+          status: 'success',
+          duration: 5000,
+          isClosable: false,
+          position: 'top',
+        });
+        navigate('/login');
+      } else {
+        toast({
+          title: 'Error',
+          description: data.message,
+          status: 'error',
+          duration: 5000,
+          isClosable: false,
+          position: 'top',
+        });
+      }
+    } catch (e) {
+      alert('Server error');
+      console.log(e);
+    }
+  };
+  
+
+
+
+
+  const formSubmitProvider=async()=>{
+    if(username1==""||password1==""|email1==""|city1==""|description==""
+    |skills==""|category==""|price==""){
+      toast({
+        title: 'Error',
+        description: 'Please complete all fields',
+        status: 'error',
+        duration: 5000,
+        isClosable: false,
+        position: 'top',
+      });
+      return;}
+      if(password1!=confirmPassword1){
+        toast({
+          title: 'Error',
+          description: 'confirmPassword does not match password',
+          status: 'error',
+          duration: 5000,
+          isClosable: false,
+          position: 'top',
+        });
+        return;
+    }
+    const bodyValue1 = {
+      username:username1,
+      password:password1,
+      email:email1,
+      city:city1,
+      role:role1,
+      description,
+      skills,
+      category,
+      price
+    };
+
+    try {
+      const request = await fetch('/api/v1/user/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bodyValue1),
+      });
+
+      const data = await request.json();
+
+      console.log(data.message)
+
+      if (request.status === 201) {
+        toast({
+          title: 'registered successfully.',
+          description: data.message,
+          status: 'success',
+          duration: 5000,
+          isClosable: false,
+          position: 'top',
+        });
+        navigate('/login');
+      } else {
+        toast({
+          title: 'Error',
+          description: data.message,
+          status: 'error',
+          duration: 5000,
+          isClosable: false,
+          position: 'top',
+        });
+      }
+    } catch (e) {
+      alert('Server error');
+      console.log(e);
+    }
+  }
+
+
+
+
+  useEffect(() => {
+    if (localStorage.getItem('loggedIn')) {
+      navigate('/home');
+    }
+  }, []);
+
+
+
     return(
         <VStack mt={"5rem"}  
         width={'100%'}
@@ -23,7 +230,7 @@ const Register =()=>{
           align="left"
           spacing="5"
           width={['90%', '90%', '458px']}>
-          <Text fontWeight="bold" fontSize="3rem" color="#121440">
+          <Text fontWeight="bold" fontSize="3rem" color="teal">
           User Registration
           </Text>
           <VStack spacing="10">
@@ -35,27 +242,27 @@ const Register =()=>{
 
             <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
             <Text >Username:</Text>
-            <Input type="text" placeholder="Enter Username"/>
+            <Input type="text" placeholder="Enter Username" value={username} onChange={usernameChange}/>
             </VStack>
 
             <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
             <Text >Password:</Text>
-            <Input type="password" placeholder="Enter Password" />
+            <Input type="password" placeholder="Enter Password" value={password} onChange={passwordChange} />
             </VStack>
 
             <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
             <Text >Confirm Password:</Text>
-            <Input type="password" placeholder="Enter Password again" />
+            <Input type="password" placeholder="Enter Password again" value={confirmPassword} onChange={confirmPasswordChange} />
             </VStack>
 
             <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
             <Text >Email:</Text>
-            <Input type="email" placeholder="Enter Email"/>
+            <Input type="email" placeholder="Enter Email" value={email} onChange={emailChange}/>
             </VStack>
 
             <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
             <Text >City Location:</Text>
-            <Input type="text" placeholder="Enter your City"/>
+            <Input type="text" placeholder="Enter your City" value={city} onChange={cityChange}/>
             </VStack>
 
 
@@ -63,13 +270,13 @@ const Register =()=>{
           <Box align={"center"}>
           <Button
             _hover={{
-              backgroundColor: '#121440',
               transform: 'scale(1.05)',
             }}
             fontSize="1.3rem"
             width="182px"
-            color="white"
-            backgroundColor="#121440">Sign up </Button>
+            colorScheme='teal' variant='outline'
+            onClick={formSubmitUser}
+            >Sign up </Button>
           </Box>
         </VStack>
       </Flex>
@@ -97,44 +304,44 @@ const Register =()=>{
 
             <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
             <Text >Username:</Text>
-            <Input type="text" placeholder="Enter Username"/>
+            <Input type="text" placeholder="Enter Username" value={username1} onChange={usernameChange1}/>
             </VStack>
 
             <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
             <Text >Password:</Text>
-            <Input type="password" placeholder="Enter Password" />
+            <Input type="password" placeholder="Enter Password" value={password1} onChange={passwordChange1} />
             </VStack>
 
             <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
             <Text >Confirm Password:</Text>
-            <Input type="password" placeholder="Enter Password again" />
+            <Input type="password" placeholder="Enter Password again" value={confirmPassword1} onChange={confirmPasswordChange1}   />
             </VStack>
 
             <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
             <Text >Email:</Text>
-            <Input type="email" placeholder="Enter Email"/>
+            <Input type="email" placeholder="Enter Email" value={email1} onChange={emailChange1} />
             </VStack>
 
             <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
             <Text >City Location:</Text>
-            <Input type="text" placeholder="Enter City"/>
+            <Input type="text" placeholder="Enter City"value={city1} onChange={cityChange1} />
             </VStack>
 
             <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
             <Text >Description:</Text>
-            <Input type="text" placeholder="Enter Description"/>
+            <Input type="text" placeholder="Enter Description" value={description} onChange={descriptionChange} />
             </VStack>
 
             <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
             <Text >Skills:</Text>
-            <Input type="text" placeholder="Enter your Skills"/>
+            <Input type="text" placeholder="Enter your Skills" value={skills} onChange={skillsChange} />
             </VStack>
 
             <HStack  spacing="5" width={"90%"}>
             
             <VStack width={"50%"} spacing="3" align="left">
             <Text >Choose catagory:</Text>
-            <Select placeholder='Select option' >
+            <Select placeholder='Select option' value={category} onChange={categoryChange} >
             <option value='Tutoring'>Tutoring</option>
             <option value='Gaming'>Gaming</option>
             <option value='Travelling'>Travelling</option>
@@ -149,7 +356,7 @@ const Register =()=>{
 
             <VStack width={"50%"} spacing="3" align="left">
             <Text >Price:</Text>
-            <Input type="text" placeholder="Price per hour"/>
+            <Input type="text" placeholder="Price per hour" value={price} onChange={priceChange} />
             </VStack>
 
             </HStack>
@@ -160,13 +367,11 @@ const Register =()=>{
           <Box align={"center"} pt="5rem">
           <Button
             _hover={{
-              backgroundColor: '#121440',
               transform: 'scale(1.05)',
             }}
             fontSize="1.3rem"
             width="182px"
-            color="white"
-            backgroundColor="#121440">Sign up </Button>
+            colorScheme='teal' variant='outline' onClick={formSubmitProvider}>Sign up </Button>
           </Box>
         </VStack> 
 

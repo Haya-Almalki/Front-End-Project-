@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Heading, Flex, VStack,HStack,TableContainer, Table, 
      Thead, Tr, Th, Tbody} from '@chakra-ui/react'
 import PAppointment from "../component/PAppointment";
+import Navbar from "../component/Navbar";
 
 
 function ProviderAppointment() {
@@ -10,6 +11,8 @@ function ProviderAppointment() {
 
 
     return (
+      <> 
+        <Navbar/>
         <HStack spacing="0" width="100vw" height="100vh">
           <Flex
             height="100vh"
@@ -42,8 +45,8 @@ function ProviderAppointment() {
             </Table></TableContainer>
             </VStack>
           </Flex>
-         
         </HStack>
+        </>
     );
 }
 

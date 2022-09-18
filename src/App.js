@@ -8,6 +8,9 @@ import UserAppointment from './pages/UserAppointment';
 import ProviderAppointment from './pages/ProviderAppointment';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home'
+import User_profile from './pages/User_profile'
+import Provider_profile from './pages/Provider_profile'
+import ProfileP from './pages/ProfileP'
 import { useState } from 'react';
 
 
@@ -29,6 +32,9 @@ function App() {
             <Route path='/providerAppointment' element={<ProviderAppointment />} />
             <Route path='/home' element={<Home setCategory={setCategory}  />} />
             <Route path="*" element={<NotFound />} />
+            <Route path='/User_profile' element={<User_profile />}/>
+            <Route path='/Provider_profile' element={<Provider_profile />}/>
+           <Route path='/profilep' element={<ProfileP />}/>
             {/* <Route path='/register' element={<Register />} /> */}
             {/* <Route element={<AuthRoute setUser={setUser} />}>
         <Route path='/' element={<Dashboard />} />

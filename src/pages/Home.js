@@ -42,7 +42,7 @@ function Home({category,setCategory}) {
   console.log("category value",category)
 
   const categoryClicked=(e)=>{
-    setCategory=e.target.value
+    setCategory(e.target.value)
     console.log(e.target.value);
     navigate('/category');
 

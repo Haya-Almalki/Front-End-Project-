@@ -1,6 +1,6 @@
 
 import {  useState } from "react";
-import {useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
     Input, VStack, HStack, Flex, Button, Textarea, Text, Heading,
@@ -34,13 +34,11 @@ function Appointment() {
     const [hour, setHour] = useState(1);
     const handleDateChange = (event) => setDate(event.target.value)
     const handleDetailsChange = (event) => setDetails(event.target.value)
-    const Location = useLocation();
-    let providerName = Location.state.appId;
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-        "username": providerName,
+        "username": "j",
         "hours": hour,
         "date": date,
         "request": details

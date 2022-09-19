@@ -49,7 +49,7 @@ function Home({category,setCategory}) {
   }
   const handleSubmit=()=>{
 
-    setCategory(category)
+    setCategory("cooking")
 
     navigate("/category");
     console.log("jj"+category)

@@ -81,7 +81,8 @@ function ProviderAppointment() {
           ) : (
             <>
             
-              <TableContainer pt="10" >
+              <TableContainer  height="100vh"
+ >
                 <HStack spacing="5" width={"90%"}>
 
                   <VStack width={"20%"} spacing="3" mb="5" align="left">

@@ -14,7 +14,7 @@ import ProfileP from './pages/ProfileP'
 import { useState } from 'react';
 import AuthRoutes from './component/AuthRoutes'
 import UpdateAppo from './pages/UpdateAppointment';
-
+import Category from './pages/Category';
 
 function App() {
   const [category, setCategory] = useState('');
@@ -42,6 +42,7 @@ function App() {
             <Route path='/User_profile' element={<User_profile />} />
             <Route path='/Provider_profile' element={<Provider_profile />} />
             <Route path='/:username/profileP' element={<ProfileP/>} />
+            <Route path='/category' element={<Category  category={category} />}/>
             {/* <Route path='/register' element={<Register />} /> */}
             {/* <Route element={<AuthRoute setUser={setUser} />}>
         <Route path='/' element={<Dashboard />} />

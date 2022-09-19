@@ -41,7 +41,11 @@ function App() {
             <Route path="*" element={<NotFound />} />
             <Route path='/User_profile' element={<User_profile />} />
             <Route path='/Provider_profile' element={<Provider_profile />} />
+<<<<<<< HEAD
             <Route path='/profilep' element={<ProfileP />} />
+=======
+            <Route path='/:username/profileP' element={<ProfileP/>} />
+>>>>>>> 79242695c351020a9136f1a679c45fe7b13116cf
             <Route path='/category' element={<Category  category={category} />}/>
             {/* <Route path='/register' element={<Register />} /> */}
             {/* <Route element={<AuthRoute setUser={setUser} />}>

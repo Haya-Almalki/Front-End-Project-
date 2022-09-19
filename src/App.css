@@ -2,7 +2,8 @@
 .BG {
     background-image: url("./images/bg.svg") ;
     background-repeat: repeat-x;
-    background-position: top 125px right 300px ;
+    background-position: top 125px right 300px;
+    background-size: cover;
   }
 
   ul{

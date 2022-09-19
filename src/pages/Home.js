@@ -11,7 +11,7 @@ import {
     Input,
     Stack,
     Text,
-    Flex,
+    Flex, Select, 
     useBreakpointValue,
     HStack,
     VStack
@@ -36,17 +36,25 @@ import {useNavigate } from 'react-router-dom';
 
 
 
-function Home({setCategory}) {
+function Home({category,setCategory}) {
 
   const navigate = useNavigate();
+  console.log("category value",category)
 
   const categoryClicked=(e)=>{
     setCategory=e.target.value
     console.log(e.target.value);
-    //navigate('/persons');
+    navigate('/category');
 
   }
+  const handleSubmit=()=>{
 
+    setCategory("cooking")
+
+    navigate("/category");
+    console.log("jj"+category)
+
+  }
 
     return (
         <>
@@ -128,7 +136,27 @@ function Home({setCategory}) {
             </Heading>
             </Container>
 
-
+            <VStack>
+        <HStack>
+        <Select 
+placeholder='Category' 
+focusBorderColor='red' 
+width='50%'
+value={category}
+ onChange={(e)=>setCategory(e.target.value)}
+  >
+  <option value='Tutoring'>Tutoring</option>
+  <option value='Gaming'>Gaming</option>
+  <option value='Travelling'>Travelling</option>
+  <option value='Shopping'>Shopping</option>
+  <option value='Cooking'>Cooking</option>
+  <option value='Art'>Art</option>
+  <option value='Hosting'>Hosting</option>
+  <option value='Baby Sitter'>Baby Sitter</option>
+</Select>
+<Button onClick={handleSubmit}> submit</Button>
+        </HStack>
+    </VStack>
 
 
               <Box>

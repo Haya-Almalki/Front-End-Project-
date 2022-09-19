@@ -1,13 +1,17 @@
 
-import { useState } from "react";
+import {  useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
     Input, VStack, HStack, Flex, Button, Textarea, Text, Heading,
-    NumberInput, NumberInputField, NumberDecrementStepper, NumberIncrementStepper
+    NumberInput, NumberInputField, NumberDecrementStepper, NumberIncrementStepper,useToast 
 } from '@chakra-ui/react';
 import { FiMinus, FiPlus } from "react-icons/fi";
 
-
 function Appointment() {
+    const navigate = useNavigate();
+
+    const toast = useToast()
     const stepperButtonStyles = {
         width: `30px`,
         height: `30px`,
@@ -26,37 +30,94 @@ function Appointment() {
         justifyItems: `center`
     };
     const [date, setDate] = useState("");
-
+    const [details, setDetails] = useState("");
+    const [hour, setHour] = useState(1);
     const handleDateChange = (event) => setDate(event.target.value)
+    const handleDetailsChange = (event) => setDetails(event.target.value)
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-    console.log(date);
-    const handleHourChange =(event) => console.log(event.target.value)
+    var raw = JSON.stringify({
+        "username": "j",
+        "hours": hour,
+        "date": date,
+        "request": details
+    });
 
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+    };
+   
+        const sendAppointmentData = async () => {
+
+            if(date==="" || details===""){
+                toast({
+                    title: 'Please Fill All Fields',
+                    status: 'error',
+                    duration: 2000,
+                    isClosable: true,
+                    position:'top',
+                  })
+            }
+            else{
+            const request = await  fetch("/api/v1/appointment/post", requestOptions);
+            const data = await request.json();
+            console.log(data.message)
+            if(data.status===201){
+                toast({
+                    title: 'The booking has been completed.',
+                    status: 'success',
+                    duration: 2000,
+                    isClosable: true,
+                    position:'top',
+                    onCloseComplete:(() => navigate("/UserAppointment")),
+                  })
+                setDate("");
+                setDetails("");
+                setHour(1)
+            }
+            else{
+                toast({
+                    title: data.message,
+                    status: 'error',
+                    duration: 2000,
+                    isClosable: true,
+                    position:'top',
+                  }) 
+            }
+        }
+        };
+    const BookAppointment = async (e) => {
+        sendAppointmentData();
+    }
     return (
-
-        <HStack spacing="0" width="100vw" height="100vh">
+        <HStack width="100vw" height="100vh">
             <Flex
                 height="100vh"
-                width={['100%', '100%', '70%']}
+                width={['100%', '100%', '100%']}
                 justifyContent="center"
                 alignItems="center"
             >
                 <VStack mx="auto" align="left" spacing="5"
                     width={['100%', '100%', '50%']}>
-                    <Heading as='h3' size='lg'> Book Appointment</Heading>
-
+                       
+                    <Heading as='h3' size='lg' color="teal" align="center" pb="5"> Book Appointment</Heading>
                     <Text>Choose Date and Time:</Text>
-
                     <Input
                         placeholder="Select Date and Time"
                         size="md"
                         type="datetime-local"
+                        value={date}
                         min={new Date().toISOString().slice(0, 16)}
                         onChange={handleDateChange}
                     />
                     <Text>Working Hour:</Text>
-                    <NumberInput size="sm" defaultValue={1} min={1} 
- 
+                    <NumberInput size="sm"
+                        defaultValue={hour} min={1}
+                        onChange={setHour}
+                        value={hour}
                         style={{
                             display: `grid`,
                             gridTemplateColumns: `30px 80px 1px`,
@@ -73,14 +134,18 @@ function Appointment() {
                         />
                     </NumberInput>
                     <Text mb="5px">Request Details:</Text>
-                    <Textarea />
-
-                    <Button colorScheme='teal' variant='outline'>
+                    <Textarea onChange={handleDetailsChange} value={details}/>
+                    <HStack
+                width={['100%', '100%', '100%']}
+                justifyContent="center"
+                alignItems="center"
+            >
+                    <Button colorScheme='teal' variant='outline'  onClick={BookAppointment}>
                         Book Now
                     </Button>
+                    </HStack>
                 </VStack></Flex>
         </HStack>
-
     );
 }
 

@@ -41,7 +41,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
             <Route path='/User_profile' element={<User_profile />} />
             <Route path='/Provider_profile' element={<Provider_profile />} />
-            <Route path='/profilep' element={<ProfileP />} />
+            <Route path='/:username/profileP' element={<ProfileP/>} />
             {/* <Route path='/register' element={<Register />} /> */}
             {/* <Route element={<AuthRoute setUser={setUser} />}>
         <Route path='/' element={<Dashboard />} />

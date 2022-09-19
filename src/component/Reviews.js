@@ -4,11 +4,11 @@ const Reviews=({reviewList})=>{
 
 return (
 <VStack align="left" >
-    {reviewList.map((item, index) => {
+    {reviewList&&reviewList.map((item, index) => {
             return(
-                <Box width={"100%"} pl={"1rem"}>
+                <Box key={index} width={"100%"} pl={"1rem"}>
                     <Divider/>
-                <VStack key={index} align="left" pl={"2rem"}>
+                <VStack  align="left" pl={"2rem"}>
                  <Divider/>
                  <HStack>
                     <Text fontWeight="bold">{item.username}</Text>
@@ -18,12 +18,12 @@ return (
             .map((_, i) => (
               <StarIcon
                 key={i}
-                color={i <4 ? 'teal.500' : 'gray.300'}
+                color={i <item.review.rate? 'teal.500' : 'gray.300'}
               />
             ))}
             </Box>
                     </HStack>
-                    <Text>{item.message}</Text>
+                    <Text>{item.review.message}</Text>
                 </VStack>
                 </Box>
             )

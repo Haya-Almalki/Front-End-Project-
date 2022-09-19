@@ -35,7 +35,7 @@ function HowItWorks() {
                 <Image w="60%" boxSize="90px" src={search} alt="search" />
                 <Heading as="h5" size="md">
                   
-                    <Box color="blue.100" pb="4" mt={5}>
+                    <Box color="teal" pb="4" mt={5}>
                       Search for a person
                     </Box>
                   
@@ -50,7 +50,7 @@ function HowItWorks() {
                 <Image w="60%" boxSize="90px" src={submit} alt="submit"  />
                 <Heading as="h5" size="md">
                   <Link>
-                    <Box color="blue.100" pb="4">
+                    <Box color="teal" pb="4">
                       Make an appointment
                     </Box>
                   </Link>
@@ -64,7 +64,7 @@ function HowItWorks() {
               <Box mx="auto" align="center" my={"auto"}>
                 <Image w="60%" boxSize="90px" src={enjoy} alt="enjoy" />
                 <Heading as="h5" size="md">
-                  <Box color="blue.100" pb="4">
+                  <Box color="teal" pb="4">
                     <Link>Enjoy</Link>
                   </Box>
                 </Heading>

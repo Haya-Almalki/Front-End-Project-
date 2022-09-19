@@ -18,7 +18,7 @@ const Login= () =>{
 
   useEffect(() => {
     if (localStorage.getItem('loggedIn')) {
-      navigate('/home');
+      navigate('/');
     }
   }, []);
 
@@ -74,7 +74,7 @@ const Login= () =>{
         isClosable: false,
         position: 'top',
       });
-      navigate('/home');
+      navigate('/');
     }
     
     

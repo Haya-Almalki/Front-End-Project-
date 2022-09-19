@@ -27,21 +27,25 @@ function App() {
       <div className='BG'>
         <BrowserRouter>
           <Routes>
-            <Route element={<AuthRoutes setUser={setUser}/>}>
-
+            <Route element={<AuthRoutes setUser={setUser} />}>
+              <Route path='/userAppointment' element={<UserAppointment />} />
+              <Route path='/updateAppointment' element={<UpdateAppo />} />
+              <Route path='/bookAppointment' element={<Appointment />} />
+              <Route path='/providerAppointment' element={<ProviderAppointment />} />
 
             </Route>
-            <Route path='/userAppointment' element={<UserAppointment />} />
-            <Route path='/updateAppointment' element={<UpdateAppo />} />
-            <Route path='/bookAppointment' element={<Appointment />} />
-            <Route path='/providerAppointment' element={<ProviderAppointment />} />
+
             <Route path='/Login' element={<Login />} />
             <Route path='/Register' element={<Register />} />
-            <Route path='/home' element={<Home setCategory={setCategory} />} />
+            <Route path='/' element={<Home setCategory={setCategory} />} />
             <Route path="*" element={<NotFound />} />
             <Route path='/User_profile' element={<User_profile />} />
             <Route path='/Provider_profile' element={<Provider_profile />} />
+<<<<<<< HEAD
+            <Route path='/profilep' element={<ProfileP />} />
+=======
             <Route path='/:username/profileP' element={<ProfileP/>} />
+>>>>>>> 79242695c351020a9136f1a679c45fe7b13116cf
             <Route path='/category' element={<Category  category={category} />}/>
             {/* <Route path='/register' element={<Register />} /> */}
             {/* <Route element={<AuthRoute setUser={setUser} />}>

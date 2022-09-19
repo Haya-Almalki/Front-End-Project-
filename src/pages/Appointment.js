@@ -1,6 +1,6 @@
 
 import {  useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate } from "react-router-dom";
 
 import {
     Input, VStack, HStack, Flex, Button, Textarea, Text, Heading,
@@ -34,13 +34,13 @@ function Appointment() {
     const [hour, setHour] = useState(1);
     const handleDateChange = (event) => setDate(event.target.value)
     const handleDetailsChange = (event) => setDetails(event.target.value)
+    const Location = useLocation();
+    let providerName = Location.state.appId;
     var myHeaders = new Headers();
-   // myHeaders.append("Authorization", "Basic SGF5YTk2OkhoMTIzNDU2");
-        //btoa("username:password")
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-        "username": "Haya",
+        "username": providerName,
         "hours": hour,
         "date": date,
         "request": details
@@ -50,7 +50,6 @@ function Appointment() {
         method: 'POST',
         headers: myHeaders,
         body: raw,
-        redirect: 'follow'
     };
    
         const sendAppointmentData = async () => {
@@ -65,7 +64,7 @@ function Appointment() {
                   })
             }
             else{
-            const request = await  fetch("http://localhost:8080/api/v1/appointment/post", requestOptions);
+            const request = await  fetch("/api/v1/appointment/post", requestOptions);
             const data = await request.json();
             console.log(data.message)
             if(data.status===201){

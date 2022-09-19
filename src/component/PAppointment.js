@@ -18,19 +18,15 @@ function PAppointment({ id, userId, datetime, hours, total, request, status }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = React.useRef()
     var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic aGF5YTpIaDEyMzEyMw==");
-    //btoa("username:password")
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = ""
     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: raw,
     };
     useEffect(() => {
         const fetchusername = async () => {
-            const request = await fetch("http://localhost:8080/api/v1/user/username/" + userId, { method: 'POST' })
+            const request = await fetch("/api/v1/user/username/" + userId,requestOptions)
             const data = await request.json();
             setUsername(data.message)
         };
@@ -38,7 +34,7 @@ function PAppointment({ id, userId, datetime, hours, total, request, status }) {
     }, []);
 
     const confirmAppointment = async (e) => {
-        const request = await fetch("http://localhost:8080/api/v1/appointment/confirm/" + id, requestOptions);
+        const request = await fetch("/api/v1/appointment/confirm/" + id, requestOptions);
         const data = await request.json();
         console.log(data)
         if (data.status === 201) {
@@ -62,7 +58,7 @@ function PAppointment({ id, userId, datetime, hours, total, request, status }) {
         }
     }
     const completeAppointment = async (e) => {
-        const request = await fetch("http://localhost:8080/api/v1/appointment/complete/" + id, requestOptions);
+        const request = await fetch("/api/v1/appointment/complete/" + id, requestOptions);
         const data = await request.json();
         console.log(data)
         if (data.status === 201) {
@@ -77,7 +73,7 @@ function PAppointment({ id, userId, datetime, hours, total, request, status }) {
         }
     }
     const cancelAppointment = async (e) => {
-        const request = await fetch("http://localhost:8080/api/v1/appointment/cancelNew/" + id, requestOptions);
+        const request = await fetch("/api/v1/appointment/cancelNew/" + id, requestOptions);
         const data = await request.json();
         console.log(data)
         if (data.status === 201) {

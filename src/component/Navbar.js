@@ -69,7 +69,7 @@ import {
       localStorage.removeItem('usename');
       localStorage.removeItem('role');
       console.log(request);
-      navigate('/home');
+      navigate('/');
   
     }
   };
@@ -82,7 +82,7 @@ import {
     <Box as="nav" bg="bg-surface" height="5rem" pt={"auto"}   py={{ base: '1', lg: '2' }}>
       
         <HStack spacing="10" justify="space-between">
-          <Link as={ReactLink} to="/home">
+          <Link as={ReactLink} to="/">
       <Image boxSize="90px" src={logo} alt="brand" />
       </Link>
     
@@ -91,15 +91,25 @@ import {
                
                 <HStack spacing="3">
                 {!localStorage.getItem('loggedIn') ? (<HStack ml={1200} color={"gray.500"}>
-                  <Link as={ReactLink}   fontSize='xl' to="/login"
+                <Button
+                  rounded={'full'}
+                 bg={'white'}
+                  width="100px"
+                  colorScheme='teal' variant='outline'
+                  > <Link as={ReactLink}   fontSize='xl' to="/login"
                    _hover={{
                     color: "teal.500",
-                  }}>Sign in</Link>
+                  }}>Sign in</Link></Button>
+                  <Button
+                  rounded={'full'}
+                  bg={'white'}
+                   width="100px"
+                   colorScheme='teal' variant='outline'
+                   >
                   <Link as={ReactLink}  fontSize='xl' to="/register"
                    _hover={{
-                    background: "white",
                     color: "teal.500",
-                  }}>Sign up</Link>
+                  }}>Sign up</Link></Button>
           </HStack>
         ) : (
                   

@@ -36,17 +36,14 @@ function UAppointment({ id, personId, datetime, hours, total, request, status,ad
 
     useEffect(() => {
         const fetchusername = async () => {
-            const request = await fetch("http://localhost:8080/api/v1/user/username/" + personId, { method: 'POST' })
+            const request = await fetch("/api/v1/user/username/" + personId, { method: 'POST' })
             const data = await request.json();
             setUsername(data.message)
         };
         fetchusername();
     }, []);
     var myHeaders = new Headers();
-  //  myHeaders.append("Authorization", "Basic SGF5YTk2OkhoMTIzNDU2");
-    //btoa("username:password")
-    //aGF5YTExOkhoMTIzMTIz
-    //SGF5YTk2OkhoMTIzNDU2
+
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
@@ -58,12 +55,11 @@ function UAppointment({ id, personId, datetime, hours, total, request, status,ad
         method: 'POST',
         headers: myHeaders,
         body: raw,
-        redirect: 'follow'
     };
     const AddReview = async (e) => {
         console.log(review);
         console.log(rate);
-        const request = await fetch("http://localhost:8080/api/v1/review/addReview/" + id, requestOptions)
+        const request = await fetch("/api/v1/review/addReview/" + id, requestOptions)
         const data = await request.json();
 
         if (data.status === 201) {
@@ -103,7 +99,7 @@ function UAppointment({ id, personId, datetime, hours, total, request, status,ad
         })
     }
     const deleteAppointment = async (e) => {
-        const request = await fetch("http://localhost:8080/api/v1/appointment/delete/" + id, {
+        const request = await fetch("/api/v1/appointment/delete/" + id, {
             method: 'DELETE',
             headers: myHeaders
         });

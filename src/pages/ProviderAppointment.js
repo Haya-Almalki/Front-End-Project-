@@ -23,17 +23,10 @@ function ProviderAppointment() {
   const handleChange = event => {
     setSelected(event.target.value);
   };
-  var myHeaders = new Headers();
- // myHeaders.append("Authorization", "Basic aGF5YTpIaDEyMzEyMw==");
-  //btoa("username:password")
-  var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-  };
+
   useEffect(() => {
     const fetchAppointmentData = async () => {
-      const request = await fetch('http://localhost:8080/api/v1/appointment/myAppointments', requestOptions);
+      const request = await fetch('/api/v1/appointment/myAppointments');
       const data = await request.json();
       setProviderAppointment(data)
     };
@@ -41,7 +34,7 @@ function ProviderAppointment() {
   }, []);
   useEffect(() => {
     const fetchConfirmedAppointment = async () => {
-      const request = await fetch('http://localhost:8080/api/v1/appointment/confirmed', requestOptions);
+      const request = await fetch('/api/v1/appointment/confirmed');
       const data = await request.json();
       setConfirmedAppointment(data)
     };
@@ -50,7 +43,7 @@ function ProviderAppointment() {
 
   useEffect(() => {
     const fetchNewAppointment = async () => {
-      const request = await fetch('http://localhost:8080/api/v1/appointment/new', requestOptions);
+      const request = await fetch('/api/v1/appointment/new');
       const data = await request.json();
       setNewAppointment(data)
     };
@@ -58,7 +51,7 @@ function ProviderAppointment() {
   }, []);
   useEffect(() => {
     const fetchNewAppointment = async () => {
-      const request = await fetch('http://localhost:8080/api/v1/appointment/completed', requestOptions);
+      const request = await fetch('/api/v1/appointment/completed');
       const data = await request.json();
       setcompleteAppointment(data)
     };

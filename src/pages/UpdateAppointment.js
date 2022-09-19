@@ -39,13 +39,8 @@ const UpdateAppointment = () => {
 
     useEffect(() => {
         const fetchAppointmentData = async () => {
-            var myHeaders = new Headers();
-            myHeaders.append("Authorization", "Basic aGF5YTk2OkhoMTIzNDU2");
-            var requestOptions = {
-                method: 'GET',
-                headers: myHeaders,
-            };
-            const request = await fetch('http://localhost:8080/api/v1/appointment/getApp/' + id, requestOptions);
+           
+            const request = await fetch('/api/v1/appointment/getApp/' + id);
             const data = await request.json();
             setDate(data.date)
             setHour(data.hours)
@@ -70,23 +65,20 @@ const UpdateAppointment = () => {
               })
         }else{
         var myHeaders = new Headers();
-        //myHeaders.append("Authorization", "Basic SGF5YTk2OkhoMTIzNDU2");
         myHeaders.append("Content-Type", "application/json");
-
         var raw = JSON.stringify({
             "date": date,
             "hours": hour,
             "request": details,
             "location": "Riyadh"
         });
-
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,
             body: raw,
         };
 
-        const request = await fetch("http://localhost:8080/api/v1/appointment/update/" + id, requestOptions)
+        const request = await fetch("/api/v1/appointment/update/" + id, requestOptions)
         const data = await request.json();
         if (data.status === 201) {
             toast({

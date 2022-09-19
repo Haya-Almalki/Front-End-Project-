@@ -1,32 +1,31 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import {
-    Heading, Flex, VStack, HStack, TableContainer, Table, Thead, Tr, Th, Tbody
+    Heading, Flex, VStack, HStack, TableContainer, Table, Thead, Tr, Th, Tbody, useToast
 } from '@chakra-ui/react'
 import UAppointment from "../component/UAppointment";
+import Navbar from '../component/Navbar'
+
 
 function UserAppointment() {
-   
-      const [userAppointment, setUserAppointment] = useState([])
+    const navigate = useNavigate();
+    const [userAppointment, setUserAppointment] = useState([])
+    const toast = useToast()
 
-    var myHeaders = new Headers();
-   // myHeaders.append("Authorization", "Basic SGF5YTk2OkhoMTIzNDU2");
-    //btoa("username:password")
-    //aGF5YTExOkhoMTIzMTIz
-    //SGF5YTk2OkhoMTIzNDU2
-    var requestOptions = {
-        method: 'GET',
-     //   headers: myHeaders,
-    };
     useEffect(() => {
         const fetchAppointmentData = async () => {
-            const request = await fetch('http://localhost:8080/api/v1/appointment/myAppointments', requestOptions);
+            const request = await fetch('/api/v1/appointment/myAppointments');
             const data = await request.json();
+            console.log(data)
             setUserAppointment(data)
+            
         };
         fetchAppointmentData();
     }, []);
-    return (
+    return (<>
+        <Heading >
+        <Navbar />
+      </Heading>
         <HStack width="100vw" >
             <Flex pt="20"
                 width={['100%', '100%', '100%']}
@@ -56,12 +55,14 @@ function UserAppointment() {
                                         </Tr>
                                     </Thead>
                                     <Tbody>
-                                        {userAppointment.map((appo) => (
-                                            <UAppointment id={appo.id} personId={appo.personId} datetime={appo.date}
+                                        {userAppointment.map((appo,index) => {
+                                            return(
+                                            <UAppointment key={index} id={appo.id} personId={appo.personId} datetime={appo.date}
                                                 hours={appo.hours} total={appo.total} request={appo.request} status={appo.status}
                                                 addReviews={appo.canAddReview}
                                             />
-                                        )
+                                            )
+                                        }
                                         )}
                                     </Tbody>
                                 </Table></TableContainer></>
@@ -72,7 +73,7 @@ function UserAppointment() {
                     )}
                 </VStack>
             </Flex>
-        </HStack>
+        </HStack></>
     );
 }
 

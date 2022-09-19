@@ -1,13 +1,15 @@
-import { Input,Box,InputGroup,InputLeftAddon,HStack,Flex,
-  VStack,Text,Button,Toast, useToast, Link 
-  ,TabList,Tab,Tabs,TabPanel,TabPanels,Select} from '@chakra-ui/react'
-import { useState,useEffect } from 'react';
-import {useNavigate } from 'react-router-dom';
+import {
+  Input, Box, InputGroup, InputLeftAddon, HStack, Flex,
+  VStack, Text, Button, Toast, useToast, Link
+  , TabList, Tab, Tabs, TabPanel, TabPanels, Select
+} from '@chakra-ui/react'
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
-const Register =()=>{
+const Register = () => {
   const navigate = useNavigate();
-  const toast=useToast();
+  const toast = useToast();
 
 
 
@@ -23,7 +25,7 @@ const Register =()=>{
   const confirmPasswordChange = (event) => setconfirmPassword(event.target.value)
   const [city, setCity] = useState('');
   const cityChange = (event) => setCity(event.target.value)
-  const role="USER";
+  const role = "USER";
 
 
   //provider
@@ -47,14 +49,14 @@ const Register =()=>{
   const categoryChange = (event) => setCategory(event.target.value)
   const [price, setPrice] = useState('');
   const priceChange = (event) => setPrice(event.target.value)
+  console.log(price)
+  const role1 = "PERSON";
 
-  const role1="PERSON";
 
 
 
-    
-  const formSubmitUser=async ()=>{
-    if(username==""||password==""|email==""|city==""){
+  const formSubmitUser = async () => {
+    if (username == "" || password == "" | email == "" | city == "") {
       toast({
         title: 'Error',
         description: 'Please complete all fields',
@@ -63,17 +65,18 @@ const Register =()=>{
         isClosable: false,
         position: 'top',
       });
-      return;}
-      if(password!=confirmPassword){
-        toast({
-          title: 'Error',
-          description: 'confirmPassword does not match password',
-          status: 'error',
-          duration: 5000,
-          isClosable: false,
-          position: 'top',
-        });
-        return;
+      return;
+    }
+    if (password != confirmPassword) {
+      toast({
+        title: 'Error',
+        description: 'confirmPassword does not match password',
+        status: 'error',
+        duration: 5000,
+        isClosable: false,
+        position: 'top',
+      });
+      return;
     }
     const bodyValue = {
       username,
@@ -119,14 +122,10 @@ const Register =()=>{
       console.log(e);
     }
   };
-  
 
-
-
-
-  const formSubmitProvider=async()=>{
-    if(username1==""||password1==""|email1==""|city1==""|description==""
-    |skills==""|category==""|price==""){
+  const formSubmitProvider = async () => {
+    if (username1 == "" || password1 == "" | email1 == "" | city1 == "" | description == ""
+      | skills == "" | category == "" | price == "") {
       toast({
         title: 'Error',
         description: 'Please complete all fields',
@@ -135,28 +134,30 @@ const Register =()=>{
         isClosable: false,
         position: 'top',
       });
-      return;}
-      if(password1!=confirmPassword1){
-        toast({
-          title: 'Error',
-          description: 'confirmPassword does not match password',
-          status: 'error',
-          duration: 5000,
-          isClosable: false,
-          position: 'top',
-        });
-        return;
+      return;
     }
+    if (password1 != confirmPassword1) {
+      toast({
+        title: 'Error',
+        description: 'confirmPassword does not match password',
+        status: 'error',
+        duration: 5000,
+        isClosable: false,
+        position: 'top',
+      });
+      return;
+    }
+    const priceValue = Number(price);
     const bodyValue1 = {
-      username:username1,
-      password:password1,
-      email:email1,
-      city:city1,
-      role:role1,
-      description,
-      skills,
-      category,
-      price
+
+      "username": username1,
+      "role": role1,
+      "password": password1,
+      "pricePerHour": priceValue,
+      "category": category,
+      "description": description,
+      "city": city1,
+      "email": email1
     };
 
     try {
@@ -203,184 +204,185 @@ const Register =()=>{
 
   useEffect(() => {
     if (localStorage.getItem('loggedIn')) {
-      navigate('/home');
+      navigate('/');
     }
   }, []);
 
 
 
-    return(
-        <VStack mt={"5rem"}  
-        width={'100%'}
-        alignItems="center">
-     <Tabs isFitted variant='enclosed' defaultIndex={0} width={'100%'}>
-  <TabList mb='1em'>
-    <Tab>User</Tab>
-    <Tab>Provider</Tab>
-  </TabList>
-  <TabPanels>
-    <TabPanel>
-    <Flex
-        width={'100%'}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <VStack
-          mx="auto"
-          align="left"
-          spacing="5"
-          width={['90%', '90%', '458px']}>
-          <Text fontWeight="bold" fontSize="3rem" color="teal">
-          User Registration
-          </Text>
-          <VStack spacing="10">
-        
-          <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-          <Text >Profile Image:</Text>
-          <Input type="file" placeholder="Profile Image" accept="image/*"/>
-          </VStack>
+  return (
+    <VStack mt={"5rem"}
+      width={'100%'}
+      alignItems="center">
+      <Tabs isFitted variant='enclosed' defaultIndex={0} width={'100%'}>
+        <TabList mb='1em'>
+          <Tab>User</Tab>
+          <Tab>Provider</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <Flex
+              width={'100%'}
+              justifyContent="center"
+              alignItems="center"
+            >
+              <VStack
+                mx="auto"
+                align="left"
+                spacing="5"
+                width={['90%', '90%', '458px']}>
+                <Text fontWeight="bold" fontSize="3rem" color="teal">
+                  User Registration
+                </Text>
+                <VStack spacing="10">
 
-            <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-            <Text >Username:</Text>
-            <Input type="text" placeholder="Enter Username" value={username} onChange={usernameChange}/>
-            </VStack>
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >Profile Image:</Text>
+                    <Input type="file" placeholder="Profile Image" accept="image/*" />
+                  </VStack>
 
-            <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-            <Text >Password:</Text>
-            <Input type="password" placeholder="Enter Password" value={password} onChange={passwordChange} />
-            </VStack>
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >Username:</Text>
+                    <Input type="text" placeholder="Enter Username" value={username} onChange={usernameChange} />
+                  </VStack>
 
-            <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-            <Text >Confirm Password:</Text>
-            <Input type="password" placeholder="Enter Password again" value={confirmPassword} onChange={confirmPasswordChange} />
-            </VStack>
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >Password:</Text>
+                    <Input type="password" placeholder="Enter Password" value={password} onChange={passwordChange} />
+                  </VStack>
 
-            <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-            <Text >Email:</Text>
-            <Input type="email" placeholder="Enter Email" value={email} onChange={emailChange}/>
-            </VStack>
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >Confirm Password:</Text>
+                    <Input type="password" placeholder="Enter Password again" value={confirmPassword} onChange={confirmPasswordChange} />
+                  </VStack>
 
-            <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-            <Text >City Location:</Text>
-            <Input type="text" placeholder="Enter your City" value={city} onChange={cityChange}/>
-            </VStack>
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >Email:</Text>
+                    <Input type="email" placeholder="Enter Email" value={email} onChange={emailChange} />
+                  </VStack>
 
-
-          </VStack>
-          <Box align={"center"}>
-          <Button
-            _hover={{
-              transform: 'scale(1.05)',
-            }}
-            fontSize="1.3rem"
-            width="182px"
-            colorScheme='teal' variant='outline'
-            onClick={formSubmitUser}
-            >Sign up </Button>
-          </Box>
-        </VStack>
-      </Flex>
-    </TabPanel>
-    <TabPanel>
-    <Flex
-        width={'100%'}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <VStack
-          mx="auto"
-          align="left"
-          spacing="5"
-          width={['90%', '90%', '35%']}>
-          <Text fontWeight="bold" fontSize="3rem" color="#121440">
-          Provider Registration
-          </Text>
-          <VStack spacing="10">
-        
-          <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-          <Text >Profile Image:</Text>
-          <Input type="file" placeholder="Profile Image" accept="image/*"/>
-          </VStack>
-
-            <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-            <Text >Username:</Text>
-            <Input type="text" placeholder="Enter Username" value={username1} onChange={usernameChange1}/>
-            </VStack>
-
-            <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-            <Text >Password:</Text>
-            <Input type="password" placeholder="Enter Password" value={password1} onChange={passwordChange1} />
-            </VStack>
-
-            <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-            <Text >Confirm Password:</Text>
-            <Input type="password" placeholder="Enter Password again" value={confirmPassword1} onChange={confirmPasswordChange1}   />
-            </VStack>
-
-            <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-            <Text >Email:</Text>
-            <Input type="email" placeholder="Enter Email" value={email1} onChange={emailChange1} />
-            </VStack>
-
-            <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-            <Text >City Location:</Text>
-            <Input type="text" placeholder="Enter City"value={city1} onChange={cityChange1} />
-            </VStack>
-
-            <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-            <Text >Description:</Text>
-            <Input type="text" placeholder="Enter Description" value={description} onChange={descriptionChange} />
-            </VStack>
-
-            <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-            <Text >Skills:</Text>
-            <Input type="text" placeholder="Enter your Skills" value={skills} onChange={skillsChange} />
-            </VStack>
-
-            <HStack  spacing="5" width={"90%"}>
-            
-            <VStack width={"50%"} spacing="3" align="left">
-            <Text >Choose catagory:</Text>
-            <Select placeholder='Select option' value={category} onChange={categoryChange} >
-            <option value='Tutoring'>Tutoring</option>
-            <option value='Gaming'>Gaming</option>
-            <option value='Travelling'>Travelling</option>
-            <option value='Shopping'>Shopping</option>
-            <option value='Cooking'>Cooking</option>
-            <option value='Art'>Art</option>
-            <option value='Party Hosting'>Party Hosting</option>
-            <option value='BabySitter'>BabySitter</option>
-
-            </Select>
-            </VStack>
-
-            <VStack width={"50%"} spacing="3" align="left">
-            <Text >Price:</Text>
-            <Input type="text" placeholder="Price per hour" value={price} onChange={priceChange} />
-            </VStack>
-
-            </HStack>
-          </VStack>
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >City Location:</Text>
+                    <Input type="text" placeholder="Enter your City" value={city} onChange={cityChange} />
+                  </VStack>
 
 
+                </VStack>
+                <Box align={"center"}>
+                  <Button
+                    _hover={{
+                      transform: 'scale(1.05)',
+                    }}
+                    fontSize="1.3rem"
+                    width="182px"
+                    colorScheme='teal' variant='outline'
+                    onClick={formSubmitUser}
+                  >Sign up </Button>
+                </Box>
+              </VStack>
+            </Flex>
+          </TabPanel>
+          <TabPanel>
+            <Flex
+              width={'100%'}
+              justifyContent="center"
+              alignItems="center"
+            >
+              <VStack
+                mx="auto"
+                align="left"
+                spacing="5"
+                width={['90%', '90%', '35%']}>
+                <Text fontWeight="bold" fontSize="3rem" color="teal">
+                  Provider Registration
+                </Text>
+                <VStack spacing="10">
 
-          <Box align={"center"} pt="5rem">
-          <Button
-            _hover={{
-              transform: 'scale(1.05)',
-            }}
-            fontSize="1.3rem"
-            width="182px"
-            colorScheme='teal' variant='outline' onClick={formSubmitProvider}>Sign up </Button>
-          </Box>
-        </VStack> 
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >Profile Image:</Text>
+                    <Input type="file" placeholder="Profile Image" accept="image/*" />
+                  </VStack>
 
-      </Flex>
-    </TabPanel>
-  </TabPanels>
-</Tabs>
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >Username:</Text>
+                    <Input type="text" placeholder="Enter Username" value={username1} onChange={usernameChange1} />
+                  </VStack>
 
-        </VStack>
-    )
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >Password:</Text>
+                    <Input type="password" placeholder="Enter Password" value={password1} onChange={passwordChange1} />
+                  </VStack>
+
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >Confirm Password:</Text>
+                    <Input type="password" placeholder="Enter Password again" value={confirmPassword1} onChange={confirmPasswordChange1} />
+                  </VStack>
+
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >Email:</Text>
+                    <Input type="email" placeholder="Enter Email" value={email1} onChange={emailChange1} />
+                  </VStack>
+
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >City Location:</Text>
+                    <Input type="text" placeholder="Enter City" value={city1} onChange={cityChange1} />
+                  </VStack>
+
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >Description:</Text>
+                    <Input type="text" placeholder="Enter Description" value={description} onChange={descriptionChange} />
+                  </VStack>
+
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                    <Text >Skills:</Text>
+                    <Input type="text" placeholder="Enter your Skills" value={skills} onChange={skillsChange} />
+                  </VStack>
+
+                  <HStack spacing="5" width={"90%"}>
+
+                    <VStack width={"50%"} spacing="3" align="left">
+                      <Text >Choose catagory:</Text>
+                      <Select placeholder='Select option' value={category} onChange={categoryChange} >
+                        <option value='Tutoring'>Tutoring</option>
+                        <option value='Patient Assistant'>Patient Assistant</option>
+                        <option value='Baby Sitter'>Baby Sitter</option>
+                        <option value='Travelling'>Travelling</option>
+                        <option value='Shopping'>Shopping</option>
+                        <option value='Cooking'>Cooking</option>
+                        <option value='Gaming'>Gaming</option>
+                        <option value='Art'>Art</option>
+                        <option value='Party Hosting'>Party Hosting</option>
+
+                      </Select>
+                    </VStack>
+
+                    <VStack width={"50%"} spacing="3" align="left">
+                      <Text >Price:</Text>
+                      <Input type="text" placeholder="Price per hour" value={price} onChange={priceChange} />
+                    </VStack>
+
+                  </HStack>
+                </VStack>
+
+
+
+                <Box align={"center"} pt="5rem">
+                  <Button
+                    _hover={{
+                      transform: 'scale(1.05)',
+                    }}
+                    fontSize="1.3rem"
+                    width="182px"
+                    colorScheme='teal' variant='outline' onClick={formSubmitProvider}>Sign up </Button>
+                </Box>
+              </VStack>
+
+            </Flex>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+
+    </VStack>
+  )
 }
 export default Register;

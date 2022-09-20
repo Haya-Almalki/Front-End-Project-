@@ -68,7 +68,7 @@ import {
       localStorage.removeItem('loggedIn');
       localStorage.removeItem('usename');
       localStorage.removeItem('role');
-      console.log(request);
+      localStorage.removeItem('image');
       navigate('/');
   
     }
@@ -81,7 +81,7 @@ import {
     <Box mb={"5"} as="section"  pb={{ base: '12', md: '24' }} height="5rem" pt={"auto"} bg="rgba(245, 234, 234, 0.422)">
     <Box as="nav" bg="bg-surface" height="5rem" pt={"auto"}   py={{ base: '1', lg: '2' }}>
       
-        <HStack spacing="10" justify="space-between">
+        <HStack spacing="1050" justify="space-between">
           <Link as={ReactLink} to="/">
       <Image boxSize="90px" src={logo} alt="brand" />
       </Link>
@@ -90,7 +90,7 @@ import {
     <Flex justify="space-between" flex="1">
                
                 <HStack spacing="3">
-                {!localStorage.getItem('loggedIn') ? (<HStack ml={1200} color={"gray.500"}>
+                {!localStorage.getItem('loggedIn') ? (<HStack  color={"gray.500"}>
                 <Button
                   rounded={'full'}
                  bg={'white'}
@@ -119,7 +119,7 @@ import {
   <div className='menu-container' ref={menuRef}>
         <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
           
-          <img src={profile}></img>
+          <img src={!localStorage.getItem('image')?profile:localStorage.getItem('image')}></img>
   
         </div>
   

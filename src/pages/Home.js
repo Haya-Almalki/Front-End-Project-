@@ -21,6 +21,7 @@ import Footer from '../component/Footer';
 import HowItWorks from '../component/HowItWorks';
 import bannerimage from '../images/bann6.jpg'
 import tutor from '../images/tutor.jpg'
+import assistant from '../images/Patient_Assistant.jpg'
 import art from '../images/art.jpg'
 import gaming from '../images/gaming.jpg'
 import hosting from '../images/hostingg.jpg'
@@ -136,28 +137,7 @@ function Home({category,setCategory}) {
             </Heading>
             </Container>
 
-            <VStack>
-        <HStack>
-        <Select 
-placeholder='Category' 
-focusBorderColor='red' 
-width='50%'
-value={category}
- onChange={(e)=>setCategory(e.target.value)}
-  >
-  <option value='Tutoring'>Tutoring</option>
-  <option value='Gaming'>Gaming</option>
-  <option value='Travelling'>Travelling</option>
-  <option value='Shopping'>Shopping</option>
-  <option value='Cooking'>Cooking</option>
-  <option value='Art'>Art</option>
-  <option value='Hosting'>Hosting</option>
-  <option value='Baby Sitter'>Baby Sitter</option>
-</Select>
-<Button onClick={handleSubmit}> submit</Button>
-        </HStack>
-    </VStack>
-
+           
 
               <Box>
               <Container maxW="container.xl" mt={10}>
@@ -174,9 +154,22 @@ value={category}
                 <VStack borderColor='gray.200'>
                 <Image
                     w="100%"
+                 
+                    borderRadius="lg"
+                    src={assistant}
+                    alt="Patient Assistant image"
+                  />
+                  <Button onClick={categoryClicked} value="Patient Assistant" colorScheme="teal" variant="link" mt="5">
+                  Patient Assistant
+                  </Button>
+                </VStack>
+
+                <VStack borderColor='gray.200'>
+                <Image
+                    w="100%"
                     borderRadius="lg"
                     src={tutor}
-                    alt="image three"
+                    alt="tutor image "
                   />
                   <Button onClick={categoryClicked} value="Tutoring" colorScheme="teal" variant="link" mt="5">
                     Tutoring
@@ -187,7 +180,7 @@ value={category}
                     w="100%"
                     borderRadius="lg"
                     src={gaming}
-                    alt="image three"
+                    alt="Gaming image "
                   />
                   <Button onClick={categoryClicked} value="Gaming" colorScheme="teal" variant="link" mt="5">
                     Gaming
@@ -198,7 +191,7 @@ value={category}
                     w="100%"
                     borderRadius="lg"
                     src={travlling}
-                    alt="image three"
+                    alt="travlling image "
                   />
                   <Button onClick={categoryClicked} value="Travelling" colorScheme="teal" variant="link" mt="5">
                     Travelling
@@ -209,7 +202,7 @@ value={category}
                     w="100%"
                     borderRadius="lg"
                     src={shopping}
-                    alt="image three"
+                    alt="shopping image "
                   />
                   <Button onClick={categoryClicked} value="Shopping" colorScheme="teal" variant="link" mt="5">
                     Shopping
@@ -220,7 +213,7 @@ value={category}
                     w="100%"
                     borderRadius="lg"
                     src={cooking}
-                    alt="image three"
+                    alt="cooking image "
                   />
                   <Button onClick={categoryClicked} value="Cooking" colorScheme="teal" variant="link" mt="5">
                     Cooking
@@ -231,7 +224,7 @@ value={category}
                     w="100%"
                     borderRadius="lg"
                     src={art}
-                    alt="image three"
+                    alt="art image "
                   />
                   <Button onClick={categoryClicked} value="Art" colorScheme="teal" variant="link" mt="5">
                     Art
@@ -242,7 +235,7 @@ value={category}
                     w="100%"
                     borderRadius="lg"
                     src={hosting}
-                    alt="image three"
+                    alt="hosting image "
                   />
                   <Button onClick={categoryClicked} value="Party Hosting" colorScheme="teal" variant="link" mt="5">
                   Party Hosting
@@ -253,7 +246,7 @@ value={category}
                     w="100%"
                     borderRadius="lg"
                     src={babysitting}
-                    alt="image three"
+                    alt="babysitting image "
                   />
                   <Button onClick={categoryClicked} value="Baby Sitter" colorScheme="teal" variant="link" mt="5">
                     Baby sitter

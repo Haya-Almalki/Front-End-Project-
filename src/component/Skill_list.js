@@ -2,27 +2,30 @@ import { Input,Box,InputGroup,InputLeftAddon,HStack,Flex,VStack,Text,Button,Toas
 import { ChakraProvider } from '@chakra-ui/react';
 
 
-const Skill_list = ({ skillList }) => {
+const Skill_list = ({ skillList,deleteSkill}) => {
+  console.log("skill list in component",skillList)
     return (
       <ChakraProvider>
       <ul >
         <VStack align={"left"}>
         {skillList.map((item, index) => {
           return (
-            <li key={index}  className='skill-bubble'>
+            <li key={item.id}  className='skill-bubble'>
               <HStack>
-              <Text>{item}</Text>
+              <Text>{item.skill}</Text>
               <Spacer/>
               <Button  _hover={{
               backgroundColor: 'red',
               transform: 'scale(1.05)',
             }}
+            id={item.id}
             fontSize="0.75rem"
             className='skillButton'
             width="4rem"
             height="1.7rem"
             color="white"
-            backgroundColor="red">Delete</Button>
+            backgroundColor="red"
+            onClick={deleteSkill}>Delete</Button>
             </HStack>
             </li>
           );

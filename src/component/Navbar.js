@@ -126,7 +126,7 @@ import {
         <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
           <Text align="center" fontSize='xl'>{localStorage.getItem('username')}</Text>
           <ul>
-            <DropdownItem img = {profile} text = {"My Profile"} to={"/profile"}  />
+            <DropdownItem img = {profile} text = {"My Profile"} to={localStorage.getItem('role') == "PERSON" ? "/Provider_profile" : "/User_profile"}  />
   
             <DropdownItem img = {app} text = {"My appointments"}
              to={localStorage.getItem('role')=="PERSON"?"/providerAppointment":"/userAppointment"}  />

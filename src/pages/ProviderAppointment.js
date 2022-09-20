@@ -5,7 +5,7 @@ import {
   Thead, Tr, Th, Tbody, Select,Box
 } from '@chakra-ui/react'
 import PAppointment from "../component/PAppointment";
-
+import Navbar from "../component/Navbar";
 
 function ProviderAppointment() {
   const [providerAppointment, setProviderAppointment] = useState([])
@@ -60,6 +60,9 @@ function ProviderAppointment() {
 
 
   return (
+    <>  <Heading >
+    <Navbar />
+  </Heading>
     <HStack width="100vw" >
       <Flex pt="20"
         width={['100%', '100%', '100%']}
@@ -69,10 +72,9 @@ function ProviderAppointment() {
         <VStack
 
           align="left"
-          spacing="2"
           width={['100%', '100%', '80%']}>
           <Heading as='h3' size='lg' color="teal">
-            My Appointment:
+            My Appointment
           </Heading>
 
           {providerAppointment.length === 0 ? (<Heading as='h3' size='md' pt="15">
@@ -81,10 +83,8 @@ function ProviderAppointment() {
           ) : (
             <>
             
-              <TableContainer  height="100vh"
- >
+              <TableContainer  height="100vh">
                 <HStack spacing="5" width={"90%"}>
-
                   <VStack width={"20%"} spacing="3" mb="5" align="left">
                     <Select value={selected} onChange={handleChange} >
                       {options.map(option => (
@@ -97,10 +97,9 @@ function ProviderAppointment() {
                   </VStack>
                 </HStack>
                 <Box overflowX="scroll">
-                <Table size='sm' variant="simple">
+                <Table size='sm' marginTop={10} variant="simple">
                   <Thead>
                     <Tr>
-                      <Th></Th>
                       <Th>User Name</Th>
                       <Th>Date</Th>
                       <Th>Time</Th>
@@ -133,7 +132,7 @@ function ProviderAppointment() {
         </VStack>
       </Flex>
 
-    </HStack>
+    </HStack></>
   );
 }
 

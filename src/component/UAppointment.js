@@ -129,7 +129,6 @@ function UAppointment({ id, personId, datetime, hours, total, request, status,ad
     }
     return (<>
         <Tr>
-            <Td><PersonalImg /> </Td>
             <Td>{username}</Td>
             <Td>{datetime.substring(0, 10)}</Td>
             <Td>{datetime.substring(11)}</Td>

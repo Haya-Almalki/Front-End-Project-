@@ -27,26 +27,25 @@ function UserAppointment() {
         <Navbar />
       </Heading>
         <HStack width="100vw">
-            <Flex pt="20"
+            <Flex
                 width={['100%', '100%', '100%']}
                 justifyContent="center"
                 alignItems="center"
             >
                 <VStack
                     align="left"
-                   // spacing="2"
+                   
                     width={['100%', '100%', '80%']}>
                     <Heading as='h3' size='lg' color="teal">
-                        My Appointment:
+                        My Appointment
                     </Heading>
                     {userAppointment.length > 0 ? (
                         <>
-                            <TableContainer      height="100vh"
+                            <TableContainer height="100vh"
 >
-                                <Table size='sm'>
+                                <Table marginTop={10} size='sm'>
                                     <Thead>
                                         <Tr>
-                                            <Th></Th>
                                             <Th>Provider Name</Th>
                                             <Th>Date</Th>
                                             <Th>Time</Th>

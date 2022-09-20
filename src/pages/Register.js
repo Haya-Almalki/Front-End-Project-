@@ -5,11 +5,16 @@ import {
 } from '@chakra-ui/react'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SA from '../component/SA'
 
 
 const Register = () => {
   const navigate = useNavigate();
   const toast = useToast();
+
+
+
+ 
 
 
 
@@ -26,6 +31,8 @@ const Register = () => {
   const [city, setCity] = useState('');
   const cityChange = (event) => setCity(event.target.value)
   const role = "USER";
+  const [image, setImage] = useState('');
+
 
 
   //provider
@@ -51,6 +58,8 @@ const Register = () => {
   const priceChange = (event) => setPrice(event.target.value)
   console.log(price)
   const role1 = "PERSON";
+  const [image1, setImage1] = useState('');
+
 
 
 
@@ -83,7 +92,8 @@ const Register = () => {
       password,
       email,
       city,
-      role
+      role,
+      image
     };
 
     try {
@@ -125,7 +135,7 @@ const Register = () => {
 
   const formSubmitProvider = async () => {
     if (username1 == "" || password1 == "" | email1 == "" | city1 == "" | description == ""
-      | skills == "" | category == "" | price == "") {
+       | category == "" | price == "") {
       toast({
         title: 'Error',
         description: 'Please complete all fields',
@@ -157,7 +167,9 @@ const Register = () => {
       "category": category,
       "description": description,
       "city": city1,
-      "email": email1
+      "email": email1,
+      "image": image1
+
     };
 
     try {
@@ -208,6 +220,33 @@ const Register = () => {
     }
   }, []);
 
+ 
+
+  const fileSelected = async (e)=>{
+    var form = new FormData();
+    form.append('image', e.target.files[0])
+    const request = await fetch("https://api.imgbb.com/1/upload?key=e82fd60d23ac4565290f5a3dce0e69cf",{
+      method: 'POST',
+      body:form
+    });    
+    const data = await request.json();
+    setImage(data.data.url)
+    
+  }
+
+  
+  const fileSelected1 = async (e)=>{
+    var form = new FormData();
+    form.append('image', e.target.files[0])
+    const request = await fetch("https://api.imgbb.com/1/upload?key=e82fd60d23ac4565290f5a3dce0e69cf",{
+      method: 'POST',
+      body:form
+    });    
+    const data = await request.json();
+    setImage1(data.data.url)
+    
+  }
+
 
 
   return (
@@ -236,10 +275,10 @@ const Register = () => {
                 </Text>
                 <VStack spacing="10">
 
-                  {/* <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
                     <Text >Profile Image:</Text>
-                    <Input type="file" placeholder="Profile Image" accept="image/*" />
-                  </VStack> */}
+                    <Input type="file" onChange={fileSelected} placeholder="Profile Image" accept="image/*" />
+                  </VStack>
 
                   <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
                     <Text >Username:</Text>
@@ -298,10 +337,10 @@ const Register = () => {
                 </Text>
                 <VStack spacing="10">
 
-                  {/* <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                   <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
                     <Text >Profile Image:</Text>
-                    <Input type="file" placeholder="Profile Image" accept="image/*" />
-                  </VStack> */}
+                    <Input type="file" onChange={fileSelected1} placeholder="Profile Image" accept="image/*" />
+                  </VStack> 
 
                   <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
                     <Text >Username:</Text>
@@ -324,8 +363,14 @@ const Register = () => {
                   </VStack>
 
                   <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-                    <Text >City Location:</Text>
-                    <Input type="text" placeholder="Enter City" value={city1} onChange={cityChange1} />
+                    <Text >City:</Text>
+                    <Select placeholder='Select City' value={city1} onChange={cityChange1} >
+
+                     {SA.cities.map((city,index) => (
+                    <option key={index} value={city}>
+                    {city}
+                   </option> ))} 
+                    </Select>
                   </VStack>
 
                   <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
@@ -333,10 +378,6 @@ const Register = () => {
                     <Input type="text" placeholder="Enter Description" value={description} onChange={descriptionChange} />
                   </VStack>
 
-                  {/* <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
-                    <Text >Skills:</Text>
-                    <Input type="text" placeholder="Enter your Skills" value={skills} onChange={skillsChange} />
-                  </VStack> */}
 
                   <HStack spacing="5" width={"90%"}>
 

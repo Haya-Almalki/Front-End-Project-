@@ -145,8 +145,8 @@ return(<>
           padding={"1rem"}>
 
         <VStack align="right">
-            <Image src={profile}  width={"13rem"} height={"13rem"}/>
-            <Box align={"center"}>
+            <Image src={localStorage.getItem('image')?localStorage.getItem('image'):profile}  width={"13rem"} height={"13rem"}/>
+            {/* <Box align={"center"}>
           <Button
             _hover={{
               backgroundColor: '#121440',
@@ -159,7 +159,7 @@ return(<>
             backgroundColor="#121440">
             Edit image
           </Button>
-          </Box>
+          </Box> */}
         </VStack>
         <Spacer/>
 
@@ -176,7 +176,7 @@ return(<>
           </Text>
           <Spacer/>
           <Box align={"center"}>
-          <Button
+          <Button colorScheme='teal'
             _hover={{
               backgroundColor: '#121440',
               transform: 'scale(1.05)',
@@ -228,7 +228,7 @@ return(<>
 
           </VStack>
           <Box align={"center"}>
-          <Button
+          <Button colorScheme='teal'
             _hover={{
               backgroundColor: '#121440',
               transform: 'scale(1.05)',

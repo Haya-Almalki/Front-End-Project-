@@ -59,6 +59,9 @@ const Login= () =>{
         const data1 = await request1.json();
         localStorage.setItem('username', data1.username)
         localStorage.setItem('role', data1.role)
+        if(data1.image)
+        localStorage.setItem('image', data1.image)
+
         
 
 

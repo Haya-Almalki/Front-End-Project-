@@ -15,7 +15,8 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  useDisclosure
+  useDisclosure,
+  useToast
 } from '@chakra-ui/react'
 import { Link, useLoction, useNavigate } from 'react-router-dom';
 import { StarIcon } from '@chakra-ui/icons'
@@ -23,8 +24,19 @@ import { StarIcon } from '@chakra-ui/icons'
 function Categories({id,image,username,description,city,pricePerHour,rate}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate();
+  const toast = useToast();
 
   const takeAppointment = () => {
+    if(localStorage.getItem('role')=="PERSON"){
+      toast({
+        title: 'Error',
+        description: 'You can not book an appointment, please register as a user',
+        status: 'error',
+        duration: 2000,
+        isClosable: false,
+        position: 'top',
+      });
+      return}
     navigate("/bookAppointment", {
       state: {
         providerName: username

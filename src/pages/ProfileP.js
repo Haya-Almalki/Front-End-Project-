@@ -88,7 +88,7 @@ return(
         height={"90%"}
         width={['90%', '90%', '90%']}>
         <Box align={"center"}>
-         <Image src={profile}  width={"13rem"} height={"13rem"}/>
+         <Image src={setProvider.personAndSkill.userBody.image}  width={"13rem"} height={"13rem"}/>
          <Text fontSize="2rem" color="#121440">
           {provider.personAndSkill.userBody.username}
         </Text>

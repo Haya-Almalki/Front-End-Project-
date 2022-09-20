@@ -1,10 +1,10 @@
 import { Input,Box,InputGroup,InputLeftAddon,HStack,Flex,VStack,Text,Button,Toast, useToast, Link, Image, Spacer,Select,Textarea} from '@chakra-ui/react'
 
 
-const SkillForm = ({addSkill}) => {
+const SkillForm = ({addSkill,skillInput,skillInputChange}) => {
 return (
     <HStack>
-    <Input type="text" placeholder="Add Skill"  width={"100%"}/>
+    <Input type="text" placeholder="Add Skill"  value={skillInput} onChange={skillInputChange} width={"100%"}/>
     <Box align={"center"}>
   <Button
     _hover={{

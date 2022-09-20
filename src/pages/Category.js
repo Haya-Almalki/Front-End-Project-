@@ -1,84 +1,84 @@
+import {
+  Heading,
+  Image,
+  Text,
+  Stack,
+  Button,
+  Flex,
+  VStack,
+  Input,
+  HStack,
+  // IconButton,
+  // Select,
+  // FormControl,
+  // FormLabel,
+  // NumberInput,
+  // NumberInputField,
+  // NumberInputStepper,
+  // NumberIncrementStepper,
+  // NumberDecrementStepper,
+  // Drawer,
+  // DrawerOverlay,
+  // DrawerContent,
+  // DrawerHeader,
+  // DrawerBody,
+  SimpleGrid,
+  Box,
+  ModalOverlay,
+  ModalFooter,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
 
-import {  
-    Heading,
-      Image,
-      Text,
-      Stack,
-      Button,
-      Flex,
-      VStack,
-      Input,
-      HStack,
-      // IconButton,
-      // Select,
-      // FormControl,
-      // FormLabel,
-      // NumberInput,
-      // NumberInputField,
-      // NumberInputStepper,
-      // NumberIncrementStepper,
-      // NumberDecrementStepper,
-      // Drawer,
-      // DrawerOverlay,
-      // DrawerContent,
-      // DrawerHeader,
-      // DrawerBody,
-      SimpleGrid,
-      Box,
-      ModalOverlay,
-      ModalFooter,
-      Modal,
-      ModalContent,
-      ModalHeader,
-      ModalCloseButton,
-      ModalBody,
-  
-     } from '@chakra-ui/react'
-      //import {SearchIcon } from '@chakra-ui/icons'
-      import { useDisclosure } from '@chakra-ui/react'
-  import React from 'react'
-  import {useEffect, useState } from 'react'
-  import { StarIcon } from '@chakra-ui/icons'
-  //import Record from '../component/cityList.json'
-  import {Link,useLoction,useNavigate} from 'react-router-dom';
-  //import Appointment from './pages/Appointment'
-  import Navbar from '../component/Navbar'
+} from '@chakra-ui/react'
+//import {SearchIcon } from '@chakra-ui/icons'
+import { useDisclosure } from '@chakra-ui/react'
+import React from 'react'
+import { useEffect, useState } from 'react'
+import { StarIcon } from '@chakra-ui/icons'
+//import Record from '../component/cityList.json'
+import { Link, useLoction, useNavigate } from 'react-router-dom';
 
-  
-  function Category({category}) {
-    const[providerList,setProviderList]=useState([])
-    const[query,setQuery]=useState('')
-    //const[price,setPrice]=useState()
-    //const[rates,setRates]=useState()
-    //const[citys,setCitys]=useState('')
-    //const[newlist,setNewlist]=useState([])
-  
-    //let Copy=[];
-  
-    
-    useEffect(() => {
-      const fetchProvidersData = async () => {
-        const request = await fetch('/api/v1/user/viewByCategoryWithRate/'+category);
-        const data = await request.json();
-        console.log(data)
-        console.log(category)
-        setProviderList(data)
-       
-      };
-      fetchProvidersData()
-     }, []);
+import Navbar from '../component/Navbar'
+import Categories from '../component/Categories'
+function Category({ category }) {
+  const [providerList, setProviderList] = useState([])
+  const [query, setQuery] = useState('')
+  //const[price,setPrice]=useState()
+  //const[rates,setRates]=useState()
+  const [citys, setCitys] = useState('')
+  //const[newlist,setNewlist]=useState([])
+  const [providerName, setProviderName] = useState("")
+  //let Copy=[];
+
+
+  useEffect(() => {
+    const fetchProvidersData = async () => {
+      const request = await fetch('/api/v1/user/viewByCategoryWithRate/' + category);
+      const data = await request.json();
+      console.log(data)
+      console.log(category)
+      setProviderList(data)
+
+    };
+    fetchProvidersData()
+  }, []);
   //console.log('type of rate',typeof rates)
-  
+
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const takeAppointment=()=>{
-  // navigate(Appointment,{
-  // state:{
-  //   providerName:pra.personAndSkill.userBody.username
-  // }
-  // })
+  const takeAppointment = () => {
+    navigate("/bookAppointment", {
+      state: {
+        providerName: providerName
+      }
+    })
   }
-  
+  const appointmentPage = () => {
+    
+  }
   // function getFilteredList() {
   //   Copy=providerList;
   //   console.log("copy value",Copy);
@@ -87,30 +87,29 @@ import {
   // }
   // setNewlist(Copy)
   // }
-  
+
   // useEffect(()=>{
   //  console.log("new list value",newlist);
   // },[newlist])
-      
-    return (
-      <>
-      {/* the filter section */}
+
+  return (
+    <>
       <Heading >
         <Navbar />
       </Heading>
-  <Heading as='h4' size='lg'  color='gray' >
-          {category}  Category
-      </Heading> 
-      <HStack  justifyContent='right' marginLeft={10} marginRight={10} marginBottom='20px' padding={2} > 
-      <Input type='text' placeholder='search space ' backgroundColor='white' focusBorderColor='red' width='50%' onChange={(e)=> setQuery(e.target.value) }/>
-      {/* <IconButton aria-label='Search database' colorScheme='teal'width='20%' icon={<SearchIcon />} /> */}
+      {/* the filter section */}
+
+
+      <Heading as='h3' size='lg' color='teal' >
+        {category}  Category
+      </Heading>
+      <HStack justifyContent='left' marginLeft={40} marginBottom='20px' padding={2} >
+        <Input type='text' placeholder='search' backgroundColor='white' focusBorderColor='red' width='30%' onChange={(e) => setQuery(e.target.value)} />
+        {/* <IconButton aria-label='Search database' colorScheme='teal'width='20%' icon={<SearchIcon />} /> */}
       </HStack>
-      
-     
-  
-  
-  
-      <VStack spacing={4}>
+
+
+      <VStack spacing={4} height="100vh">
         {/* <SimpleGrid
       marginLeft={80}
        spacing={10}
@@ -139,130 +138,38 @@ import {
     onClick={getFilteredList}
     >filter</Button> 
       </SimpleGrid> */}
-  
-      <SimpleGrid
-      direction={{base: 'column', md: 'row'}}
-      columns={3}
-      height="100vh"
-       padding={15}
-      spacing={20}
-      justifyContent='center'
-      gap={3} 
-     >
-  
-  {/*The card section*/}
-      {/* map start */}
-      {/* pro.personAndSkill.userBody.city.toLowerCase().includes(citys.toLowerCase()) */}
-      {(providerList
-      //.filter((pro)=>{return (pro.personAndSkill.userBody.username.toLowerCase().includes(query.toLowerCase())||pro.personAndSkill.userBody.description.toLowerCase().includes(query.toLowerCase()))} )
-      // .filter((rc)=>{return(rc.personAndSkill.userBody.city.toLowerCase().includes(citys.toLowerCase()))}))
-      //  .filter((rr)=>{console.log("type of rate",rates);return(rr.personAndSkill.rate===rates)})
-     .map((pra)=>(
-        <Stack key={pra.personAndSkill.userBody.id}
-        borderWidth="1px"
-        borderRadius="lg"
-        w={{ sm: '100%', md: '540px',lg:'420px' }}
-        height={{ sm: '476px', md: '20rem', lg:'15rem' }}
-        direction={{ base: 'column', md: 'row'  }}
-        bg="white" _dark={{ bg: "gray.900" }}
-        boxShadow={'2xl'}
-        padding={4}>
-        <Flex flex={1} bg="gray.200">
-          <Image
-            objectFit="cover"
-            boxSize="100%"
-            rounded='lg'
-            src={pra.personAndSkill.userBody.image}
-          />
-        </Flex>
-        <Stack
-          flex={1}
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          p={1}
-          pt={2}>
-          <Heading fontSize={'2xl'} fontFamily={'body'}>
-        <Link to={`/${pra.personAndSkill.userBody.username}/profileP`}>  {pra.personAndSkill.userBody.username} </Link>
-          </Heading>
-      
-             <Button onClick={onOpen} colorScheme='teal' variant='link'>
-             Description About me
-             </Button> 
-          
-          <Modal onClose={onClose} isOpen={isOpen} isCentered>
-            <ModalOverlay/>
-            <ModalContent>
-              <ModalHeader>About Provider</ModalHeader>
-              <ModalCloseButton/>
-              <ModalBody>
-              {pra.personAndSkill.userBody.description} 
-              </ModalBody>
-              <ModalFooter>
-              <Button onClick={onClose}>Close</Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
-          <HStack >
-        
-          <Text  >
-          City: {pra.personAndSkill.userBody.city} 
-          </Text>
-      
-          <Text>
-          price: {pra.personAndSkill.userBody.pricePerHour}  SAR
-          </Text>
-          </HStack>
-          <Box display='flex' mt='2' alignItems='center'>
-            {Array(5)
-              .fill('')
-              .map((_, i) => (
-                <StarIcon
-                  key={i}
-                  color={i <pra.rate ? '#ffd700' : 'gray.300'}
-                />
-              ))}
-              </Box>
-    
-          <Stack 
-            width={'100%'}
-            mt={'2rem'}
-            direction={'row'}
-            padding={2}
-            justifyContent={'space-between'}
-            alignItems={'center'}>
-          
-            <Button
-            onClick={takeAppointment} 
-              flex={1}
-              fontSize={'sm'}
-              rounded={'full'}
-              bg={'teal.400'}
-              color={'white'}
-              boxShadow={
-                '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-              }
-              _hover={{
-                bg: 'teal.500',
-              }}
-              _focus={{
-                bg: 'teal.500',
-              }}>
-              Book Appointment
-            </Button>
-          </Stack>
-        </Stack>
-      </Stack>
+
+        <SimpleGrid
+          direction={{ base: 'column', md: 'row' }}
+          columns={3}
+          padding={15}
+          spacing={20}
+          justifyContent='center'
+          gap={3}
+        >
+
+          {/*The card section*/}
+          {/* map start */}
+          {/* pro.personAndSkill.userBody.city.toLowerCase().includes(citys.toLowerCase()) */}
+          {(providerList
+            .filter((pro) => { return (pro.personAndSkill.userBody.username.toLowerCase().includes(query.toLowerCase()) || pro.personAndSkill.userBody.description.toLowerCase().includes(query.toLowerCase())) })
+            .filter((rc) => { return (rc.personAndSkill.userBody.city.toLowerCase().includes(citys.toLowerCase())) })
+            //  .filter((rr)=>{console.log("type of rate",rates);return(rr.personAndSkill.rate===rates)})
+            .map((pra) => (
+              <Categories id={pra.personAndSkill.userBody.id} image={pra.personAndSkill.userBody.image}
+              username={pra.personAndSkill.userBody.username} description={pra.personAndSkill.userBody.description}
+              city={pra.personAndSkill.userBody.city} pricePerHour={pra.personAndSkill.userBody.pricePerHour}
+              rate={pra.rate}
+
+
+              />
        )))}
-      
-   {/* map end */}
-  
-      
-  
-    </SimpleGrid>
-    </VStack>
+
+          {/* map end */}
+        </SimpleGrid>
+      </VStack>
     </>
-    )
-  }
-  
-  export default Category;
+  )
+}
+
+export default Category;

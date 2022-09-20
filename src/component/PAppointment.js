@@ -26,7 +26,7 @@ function PAppointment({ id, userId, datetime, hours, total, request, status }) {
     };
     useEffect(() => {
         const fetchusername = async () => {
-            const request = await fetch("/api/v1/user/username/" + userId,requestOptions)
+            const request = await fetch("/api/v1/user/username/" + userId, requestOptions)
             const data = await request.json();
             setUsername(data.message)
         };
@@ -43,17 +43,17 @@ function PAppointment({ id, userId, datetime, hours, total, request, status }) {
                 status: 'success',
                 duration: 2000,
                 isClosable: true,
-                position:'top',
-                onCloseComplete:(() => window.location.reload()),
-            })         
-        }else{
+                position: 'top',
+                onCloseComplete: (() => window.location.reload()),
+            })
+        } else {
             toast({
                 title: data.message,
                 status: 'error',
                 duration: 2000,
                 isClosable: true,
-                position:'top',
-                onCloseComplete:(() => window.location.reload()),
+                position: 'top',
+                onCloseComplete: (() => window.location.reload()),
             })
         }
     }
@@ -67,8 +67,8 @@ function PAppointment({ id, userId, datetime, hours, total, request, status }) {
                 status: 'success',
                 duration: 2000,
                 isClosable: true,
-                position:'top',
-                onCloseComplete:(() => window.location.reload()),
+                position: 'top',
+                onCloseComplete: (() => window.location.reload()),
             })
         }
     }
@@ -83,26 +83,25 @@ function PAppointment({ id, userId, datetime, hours, total, request, status }) {
                 status: 'success',
                 duration: 2000,
                 isClosable: true,
-                position:'top',
-                onCloseComplete:(() => window.location.reload()),
+                position: 'top',
+                onCloseComplete: (() => window.location.reload()),
             })
         }
-        else{
+        else {
             onClose()
             toast({
                 title: data.message,
                 status: 'error',
                 duration: 2000,
                 isClosable: true,
-                position:'top',
-                onCloseComplete:(() => window.location.reload()),
+                position: 'top',
+                onCloseComplete: (() => window.location.reload()),
             })
         }
-    }  
+    }
     return (
         <>
             <Tr key={id}>
-                <Td><PersonalImg /></Td>
                 <Td>{username}</Td>
                 <Td>{datetime.substring(0, 10)}</Td>
                 <Td>{datetime.substring(11)}</Td>
@@ -145,8 +144,8 @@ function PAppointment({ id, userId, datetime, hours, total, request, status }) {
                         Completed
                     </Button></Td></>) : ([status === "canceled" ? (<Td>
                         <Heading as='h5' size='sm' color="red.500"> Canceled</Heading></Td>) : (<Td><Heading as='h5' size='sm' color="teal">
-                        Completed
-                    </Heading></Td>)])])}
+                            Completed
+                        </Heading></Td>)])])}
             </Tr>
             <Tr> <Td colSpan={6}><Text size='md' color="teal">Request Details: </Text>{request}</Td>
             </Tr>

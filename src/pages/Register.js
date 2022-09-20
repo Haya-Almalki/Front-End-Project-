@@ -236,10 +236,10 @@ const Register = () => {
                 </Text>
                 <VStack spacing="10">
 
-                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                  {/* <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
                     <Text >Profile Image:</Text>
                     <Input type="file" placeholder="Profile Image" accept="image/*" />
-                  </VStack>
+                  </VStack> */}
 
                   <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
                     <Text >Username:</Text>
@@ -298,10 +298,10 @@ const Register = () => {
                 </Text>
                 <VStack spacing="10">
 
-                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                  {/* <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
                     <Text >Profile Image:</Text>
                     <Input type="file" placeholder="Profile Image" accept="image/*" />
-                  </VStack>
+                  </VStack> */}
 
                   <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
                     <Text >Username:</Text>
@@ -333,10 +333,10 @@ const Register = () => {
                     <Input type="text" placeholder="Enter Description" value={description} onChange={descriptionChange} />
                   </VStack>
 
-                  <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
+                  {/* <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
                     <Text >Skills:</Text>
                     <Input type="text" placeholder="Enter your Skills" value={skills} onChange={skillsChange} />
-                  </VStack>
+                  </VStack> */}
 
                   <HStack spacing="5" width={"90%"}>
 

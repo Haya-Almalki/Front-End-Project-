@@ -1,6 +1,7 @@
 
 import {  useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
+import Navbar from '../component/Navbar'
 
 import {
     Input, VStack, HStack, Flex, Button, Textarea, Text, Heading,
@@ -10,7 +11,8 @@ import { FiMinus, FiPlus } from "react-icons/fi";
 
 function Appointment() {
     const navigate = useNavigate();
-
+    const Location=useLocation();
+    let provider=Location.state.providerName;
     const toast = useToast()
     const stepperButtonStyles = {
         width: `30px`,
@@ -38,7 +40,7 @@ function Appointment() {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-        "username": "j",
+        "username": provider,
         "hours": hour,
         "date": date,
         "request": details
@@ -93,6 +95,9 @@ function Appointment() {
         sendAppointmentData();
     }
     return (
+        <> <Heading >
+        <Navbar />
+      </Heading>
         <HStack width="100vw" height="100vh">
             <Flex
                 height="100vh"
@@ -145,7 +150,7 @@ function Appointment() {
                     </Button>
                     </HStack>
                 </VStack></Flex>
-        </HStack>
+        </HStack></>
     );
 }
 

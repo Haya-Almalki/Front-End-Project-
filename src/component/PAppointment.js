@@ -1,4 +1,3 @@
-import PersonalImg from "./PersonalImg";
 import {
     Button, Heading, Tr, Td, Text, useToast, AlertDialog,
     AlertDialogBody,
@@ -11,7 +10,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 
-function PAppointment({ id, userId, datetime, hours, total, request, status }) {
+function PAppointment({ id, userId, datetime, hours, total, request, status, payed, location }) {
     const [username, setUsername] = useState("")
     const toast = useToast()
     const navigate = useNavigate();
@@ -105,6 +104,7 @@ function PAppointment({ id, userId, datetime, hours, total, request, status }) {
                 <Td>{username}</Td>
                 <Td>{datetime.substring(0, 10)}</Td>
                 <Td>{datetime.substring(11)}</Td>
+                <Td>{location}</Td>
                 <Td>{hours}</Td>
                 <Td>{total}</Td>
                 {status === "new" ? (<><Td><Heading as='h5' size='sm' color="#718096"> Pending</Heading></Td>
@@ -140,12 +140,15 @@ function PAppointment({ id, userId, datetime, hours, total, request, status }) {
                                 </AlertDialogContent>
                             </AlertDialogOverlay>
                         </AlertDialog>
-                    </Td></>) : ([status === "confirmed" ? (<><Td> <Heading as='h5' size='sm' color="teal"> Confirmed</Heading></Td><Td><Button colorScheme='teal' onClick={completeAppointment} variant='outline' mr="2">
-                        Completed
-                    </Button></Td></>) : ([status === "canceled" ? (<Td>
-                        <Heading as='h5' size='sm' color="red.500"> Canceled</Heading></Td>) : (<Td><Heading as='h5' size='sm' color="teal">
+                    </Td></>) : ([status === "confirmed" && payed ? (<><Td> <Heading as='h5' size='sm' color="teal"> Confirmed</Heading></Td>
+                        <Td><Button colorScheme='teal' onClick={completeAppointment} variant='outline' mr="2">
                             Completed
-                        </Heading></Td>)])])}
+                        </Button></Td></>) : ([status === "confirmed" && !payed ? (
+                            <Td><Heading as='h5' size='sm' color="#718096"> Awaiting Payment</Heading></Td>) : ([status === "canceled" ? (<Td>
+                                <Heading as='h5' size='sm' color="red.500"> Canceled</Heading></Td>) : (<Td><Heading as='h5' size='sm' color="teal">
+                                    Completed
+                                </Heading></Td>)]
+                        )])])}
             </Tr>
             <Tr> <Td colSpan={6}><Text size='md' color="teal">Request Details: </Text>{request}</Td>
             </Tr>

@@ -34,7 +34,7 @@ function UserAppointment() {
             >
                 <VStack
                     align="left"
-                   
+                    height="100vh"
                     width={['100%', '100%', '80%']}>
                     <Heading as='h3' size='lg' color="teal">
                         My Appointment
@@ -49,6 +49,7 @@ function UserAppointment() {
                                             <Th>Provider Name</Th>
                                             <Th>Date</Th>
                                             <Th>Time</Th>
+                                            <Th>Location</Th>
                                             <Th>Total Hours</Th>
                                             <Th>Total Price</Th>
                                             <Th>status</Th>
@@ -57,9 +58,9 @@ function UserAppointment() {
                                     <Tbody>
                                         {userAppointment.map((appo,index) => {
                                             return(
-                                            <UAppointment key={index} id={appo.id} personId={appo.personId} datetime={appo.date}
+                                            <UAppointment id={appo.id}image={appo.image} personId={appo.personId} datetime={appo.date}
                                                 hours={appo.hours} total={appo.total} request={appo.request} status={appo.status}
-                                                addReviews={appo.canAddReview}
+                                                addReviews={appo.canAddReview} payed={appo.payed} location={appo.location}
                                             />
                                             )
                                         }

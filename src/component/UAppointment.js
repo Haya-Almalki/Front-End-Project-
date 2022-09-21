@@ -23,10 +23,12 @@ import payment from '../images/payment.PNG'
 
 function UAppointment({ id, personId, datetime, hours, total, request, status, addReviews, payed,location }) {
     const navigate = useNavigate();
+
     const [username, setUsername] = useState("")
     const [number,setNumber]=useState("");
     const[name,setName]=useState("")
     const[date,setDate]=useState("")
+    const[image,setImage]=useState("")
     const[cvc,setCvc]=useState("")
     const handleDate = (event) => setDate(event.target.value)
     const handleName = (event) => setName(event.target.value)
@@ -42,6 +44,7 @@ function UAppointment({ id, personId, datetime, hours, total, request, status, a
     const cancelRef = React.useRef()
     const [rate, setRate] = useState();
     const [review, setReview] = useState("");
+    const[provider,setProvider]=useState()
     const handleReview = (event) => setReview(event.target.value)
     const toast = useToast()
 
@@ -53,6 +56,8 @@ function UAppointment({ id, personId, datetime, hours, total, request, status, a
         };
         fetchusername();
     }, []);
+
+ 
     var myHeaders = new Headers();
 
     myHeaders.append("Content-Type", "application/json");
@@ -97,8 +102,7 @@ else{
     }
     }
     const AddReview = async (e) => {
-        console.log(review);
-        console.log(rate);
+       
         const request = await fetch("/api/v1/review/addReview/" + id, requestOptions)
         const data = await request.json();
 
@@ -169,6 +173,7 @@ else{
     }
     return (<>
         <Tr>
+      
             <Td>{username}</Td>
             <Td>{datetime.substring(0, 10)}</Td>
             <Td>{datetime.substring(11)}</Td>

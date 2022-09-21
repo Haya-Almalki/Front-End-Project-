@@ -99,6 +99,7 @@ function Appointment() {
         sendAppointmentData();
     }
     window.scrollTo(0, 0);
+
     return (
         <> <Heading >
         <Navbar />

@@ -1,4 +1,4 @@
-import { Input,Box,InputGroup,InputLeftAddon,HStack,Flex,VStack,Text,Button,Toast, useToast, Link, Image, Spacer,Select,Textarea,Divider,Spinner} from '@chakra-ui/react'
+import { Input,Box,Heading, InputGroup,InputLeftAddon,HStack,Flex,VStack,Text,Button,Toast, useToast, Link, Image, Spacer,Select,Textarea,Divider,Spinner} from '@chakra-ui/react'
 import profile from '../images/profile.png';
 import Reviews from '../component/Reviews';
 import { StarIcon} from '@chakra-ui/icons'
@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation,useParams} from "react-router-dom";
 
 
+import Navbar from '../component/Navbar'
 
 
 const ProfileP =()=>{
@@ -35,7 +36,7 @@ const ProfileP =()=>{
       }
     };
     fetchPerson();
-  }, []);
+  }, [username]);
 
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const ProfileP =()=>{
       }
     };
     fetchReviews();
-  }, []);
+  }, [username]);
 
   
 
@@ -62,8 +63,12 @@ const ProfileP =()=>{
 
     const toast=useToast();
     window.scrollTo(0, 0);
+
 return(
   <>
+  <Heading >
+        <Navbar />
+      </Heading>
   {loading ? (
         <Spinner
           thickness="4px"
@@ -88,7 +93,7 @@ return(
         height={"90%"}
         width={['90%', '90%', '90%']}>
         <Box align={"center"}>
-         <Image src={setProvider.personAndSkill.userBody.image}  width={"13rem"} height={"13rem"}/>
+         <Image src={provider.personAndSkill.userBody.image}  width={"13rem"} height={"13rem"}/>
          <Text fontSize="2rem" color="#121440">
           {provider.personAndSkill.userBody.username}
         </Text>

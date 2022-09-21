@@ -370,15 +370,14 @@ return(
             <Spacer/>
           </VStack>
           <Box align={"center"}>
-          <Button colorScheme='teal'
+          <Button 
             _hover={{
               backgroundColor: '#121440',
               transform: 'scale(1.05)',
             }}
             fontSize="1.3rem"
             width="182px"
-            color="white"
-            backgroundColor="#121440"
+            colorScheme='teal' variant='outline'
             onClick={updateProfile}
           >
             Update profile

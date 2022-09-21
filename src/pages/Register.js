@@ -248,7 +248,7 @@ const Register = () => {
   }
 
 
-  window.scrollTo(0, 0);
+
   return (
     <VStack mt={"5rem"}
       width={'100%'}
@@ -302,8 +302,14 @@ const Register = () => {
 
                   <VStack width={['90%', '90%', '458px']} spacing="3" align="left">
                     <Text >City Location:</Text>
-                    <Input type="text" placeholder="Enter your City" value={city} onChange={cityChange} />
-                  </VStack>
+                    <Select placeholder='Select City' value={city} onChange={cityChange} >
+
+                          {SA.cities.map((city,index) => (
+                          <option key={index} value={city}>
+                                      {city}
+                                    </option> ))} 
+                            </Select>   
+              </VStack>
 
 
                 </VStack>

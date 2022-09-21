@@ -16,13 +16,13 @@ function UserAppointment() {
         const fetchAppointmentData = async () => {
             const request = await fetch('/api/v1/appointment/myAppointments');
             const data = await request.json();
-            console.log(data)
             setUserAppointment(data)
             
         };
         fetchAppointmentData();
     }, []);
     window.scrollTo(0, 0);
+
     return (<>
         <Heading >
         <Navbar />
@@ -59,7 +59,7 @@ function UserAppointment() {
                                     <Tbody>
                                         {userAppointment.map((appo,index) => {
                                             return(
-                                            <UAppointment id={appo.id}image={appo.image} personId={appo.personId} datetime={appo.date}
+                                            <UAppointment id={appo.id} personId={appo.personId} datetime={appo.date}
                                                 hours={appo.hours} total={appo.total} request={appo.request} status={appo.status}
                                                 addReviews={appo.canAddReview} payed={appo.payed} location={appo.location}
                                             />

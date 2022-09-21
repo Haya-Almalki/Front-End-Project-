@@ -19,7 +19,8 @@ import {
     UnorderedList,
     List,
     Link,
-    VStack
+    VStack,
+    Spacer
   } from '@chakra-ui/react';
   import React from 'react'
   import logo from '../images/logo.png';
@@ -82,12 +83,19 @@ import {
     <Box as="nav" bg="bg-surface" height="5rem" pt={"auto"}   py={{ base: '1', lg: '2' }}>
       
         <HStack spacing="1050" justify="space-between">
+        <HStack width="15%" >
           <Link as={ReactLink} to="/">
       <Image boxSize="90px" src={logo} alt="brand" />
       </Link>
+      <Spacer/>
+      <HashLink to={'/#Categories'} align="left" ml="100rem" marginLeft={"100rem"}>
+      <Text fontSize='xl' >Categories</Text>
+    </HashLink>
+    </HStack>
+
     
-  
     <Flex justify="space-between" flex="1">
+  
                
                 <HStack spacing="3">
                 {!localStorage.getItem('loggedIn') ? (<HStack  color={"gray.500"}>

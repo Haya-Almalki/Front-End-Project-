@@ -61,7 +61,7 @@ const ProfileP =()=>{
 
 
     const toast=useToast();
-
+    window.scrollTo(0, 0);
 return(
   <>
   {loading ? (

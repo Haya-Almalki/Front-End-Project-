@@ -248,7 +248,7 @@ const Register = () => {
   }
 
 
-
+  window.scrollTo(0, 0);
   return (
     <VStack mt={"5rem"}
       width={'100%'}

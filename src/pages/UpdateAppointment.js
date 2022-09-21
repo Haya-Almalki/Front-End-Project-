@@ -22,6 +22,7 @@ function UserAppointment() {
         };
         fetchAppointmentData();
     }, []);
+    window.scrollTo(0, 0);
     return (<>
         <Heading >
         <Navbar />

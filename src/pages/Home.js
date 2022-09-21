@@ -56,7 +56,7 @@ function Home({category,setCategory}) {
     console.log("jj"+category)
 
   }
-
+  window.scrollTo(0, 0);
     return (
         <>
          <Heading >
@@ -132,7 +132,7 @@ function Home({category,setCategory}) {
 
 
           <Container maxWidth="container.xl" my="3">
-            <Heading align="center" as="h3" size="xl" pb="2" >
+            <Heading align="center" as="h3" size="xl" pb="2" id="Categories">
               Categories
             </Heading>
             </Container>

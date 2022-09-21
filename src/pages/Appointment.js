@@ -98,6 +98,7 @@ function Appointment() {
     const BookAppointment = async (e) => {
         sendAppointmentData();
     }
+    window.scrollTo(0, 0);
     return (
         <> <Heading >
         <Navbar />

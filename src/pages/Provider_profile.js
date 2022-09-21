@@ -215,7 +215,7 @@ const Provider_profile =()=>{
        
             }
         };
-
+window.scrollTo(0, 0);
 return(
   <>
        <Heading >

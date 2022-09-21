@@ -58,7 +58,7 @@ function ProviderAppointment() {
     fetchNewAppointment();
   }, []);
 
-
+  window.scrollTo(0, 0);
   return (
     <>  <Heading >
       <Navbar />

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import {
   Heading, Flex, VStack, HStack, TableContainer, Table,
-  Thead, Tr, Th, Tbody, Select,Box
+  Thead, Tr, Th, Tbody, Select, Box
 } from '@chakra-ui/react'
 import PAppointment from "../component/PAppointment";
 import Navbar from "../component/Navbar";
@@ -61,78 +61,81 @@ function ProviderAppointment() {
 
   return (
     <>  <Heading >
-    <Navbar />
-  </Heading>
-    <HStack width="100vw" >
-      <Flex pt="20"
-        width={['100%', '100%', '100%']}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <VStack
+      <Navbar />
+    </Heading>
+      <HStack width="100vw" >
+        <Flex pt="20"
+          width={['100%', '100%', '100%']}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <VStack
+            height="100vh"
+            align="left"
+            width={['100%', '100%', '80%']}>
+            <Heading as='h3' size='lg' color="teal">
+              My Appointment
+            </Heading>
 
-          align="left"
-          width={['100%', '100%', '80%']}>
-          <Heading as='h3' size='lg' color="teal">
-            My Appointment
-          </Heading>
+            {providerAppointment.length > 0 ? (
+              <>
 
-          {providerAppointment.length === 0 ? (<Heading as='h3' size='md' pt="15">
-            You don't have any appointment
-          </Heading>
-          ) : (
-            <>
-            
-              <TableContainer  height="100vh">
-                <HStack spacing="5" width={"90%"}>
-                  <VStack width={"20%"} spacing="3" mb="5" align="left">
-                    <Select value={selected} onChange={handleChange} >
-                      {options.map(option => (
-                        <option key={option.value} value={option.value}>
-                          {option.text}
-                        </option>
-                      ))}
+                <TableContainer height="100vh">
+                  <HStack spacing="5" width={"90%"}>
+                    <VStack width={"20%"} spacing="3" mb="5" align="left">
+                      <Select value={selected} onChange={handleChange} >
+                        {options.map(option => (
+                          <option key={option.value} value={option.value}>
+                            {option.text}
+                          </option>
+                        ))}
 
-                    </Select>
-                  </VStack>
-                </HStack>
-                <Box overflowX="scroll">
-                <Table size='sm' marginTop={10} variant="simple">
-                  <Thead>
-                    <Tr>
-                      <Th>User Name</Th>
-                      <Th>Date</Th>
-                      <Th>Time</Th>
-                      <Th>Total Hours</Th>
-                      <Th>Total Price</Th>
-                      <Th>Status</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
+                      </Select>
+                    </VStack>
+                  </HStack>
+                  <Table size='sm' marginTop={10} variant="simple">
+                    <Thead>
+                      <Tr>
+                        <Th>User Name</Th>
+                        <Th>Date</Th>
+                        <Th>Time</Th>
+                        <Th>Location</Th>
+                        <Th>Total Hours</Th>
+                        <Th>Total Price</Th>
+                        <Th>Status</Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
 
-                    {[ selected==="all" ?
-                    (providerAppointment.map((appo) => (
-                      <PAppointment id={appo.id} userId={appo.userId} datetime={appo.date}
-                        hours={appo.hours} total={appo.total} request={appo.request} status={appo.status} />
-                    )
-                    ))
-                    :([ selected==="confirm"?
-                    (confirmedAppointment.map((appo) => (
-                      <PAppointment id={appo.id} userId={appo.userId} datetime={appo.date}
-                        hours={appo.hours} total={appo.total} request={appo.request} status={appo.status} />)))
-                        :([selected==="new"?
-                        (newAppointment.map((appo) => (
+                      {[selected === "all" ?
+                        (providerAppointment.map((appo) => (
                           <PAppointment id={appo.id} userId={appo.userId} datetime={appo.date}
-                            hours={appo.hours} total={appo.total} request={appo.request} status={appo.status} />)))
-                            :(completeAppointment.map((appo) => (
+                            hours={appo.hours} total={appo.total} request={appo.request} status={appo.status}
+                            payed={appo.payed} location={appo.location}
+                          />
+                        )
+                        ))
+                        : ([selected === "confirm" ?
+                          (confirmedAppointment.map((appo) => (
+                            <PAppointment id={appo.id} userId={appo.userId} datetime={appo.date}
+                              hours={appo.hours} total={appo.total} request={appo.request} status={appo.status} payed={appo.payed} location={appo.location} />)))
+                          : ([selected === "new" ?
+                            (newAppointment.map((appo) => (
                               <PAppointment id={appo.id} userId={appo.userId} datetime={appo.date}
-                                hours={appo.hours} total={appo.total} request={appo.request} status={appo.status} />)))])])]}
-                  </Tbody>
-                </Table></Box></TableContainer></>)}
-        </VStack>
-      </Flex>
+                                hours={appo.hours} total={appo.total} request={appo.request} status={appo.status}  payed={appo.payed} location={appo.location} />)))
+                            : (completeAppointment.map((appo) => (
+                              <PAppointment id={appo.id}  userId={appo.userId} datetime={appo.date}
+                                hours={appo.hours} total={appo.total} request={appo.request} status={appo.status} payed={appo.payed} location={appo.location} />)))])])]}
+                    </Tbody>
+                  </Table></TableContainer></>
+            ) : (<Heading as='h3' size='md' pt="15">
+              You don't have any appointment
+            </Heading>
+            )}
+          </VStack>
+        </Flex>
 
-    </HStack></>
+      </HStack></>
   );
 }
 

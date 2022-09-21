@@ -1,13 +1,12 @@
 import React from 'react';
-import PersonalImg from "./PersonalImg";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import {
-    Button, Td, Tr, Modal,
+    Button, Td, Tr, Modal, Input,
     ModalOverlay, Textarea,
     ModalContent, Heading,
-    ModalFooter, Text,
+    ModalFooter, Text, Image,
     ModalBody, useToast,
     ModalCloseButton, FormControl, FormLabel, useDisclosure,
     AlertDialog,
@@ -16,14 +15,26 @@ import {
     AlertDialogHeader,
     AlertDialogContent,
     AlertDialogOverlay,
+    HStack,
+    VStack,
 } from '@chakra-ui/react'
+import payment from '../images/payment.PNG'
 
 
-function UAppointment({ id, personId, datetime, hours, total, request, status,addReviews }) {
+function UAppointment({ id, personId, datetime, hours, total, request, status, addReviews, payed,location }) {
     const navigate = useNavigate();
     const [username, setUsername] = useState("")
+    const [number,setNumber]=useState("");
+    const[name,setName]=useState("")
+    const[date,setDate]=useState("")
+    const[cvc,setCvc]=useState("")
+    const handleDate = (event) => setDate(event.target.value)
+    const handleName = (event) => setName(event.target.value)
+    const handleNumber = (event) => setNumber(event.target.value)
+    const handleCvc = (event) => setCvc(event.target.value)
 
     const { isOpen: isOpenReview, onOpen: onOpenReview, onClose: onCloseReview } = useDisclosure()
+    const { isOpen: isOpenPay, onOpen: onOpenPay, onClose: onClosePay } = useDisclosure()
 
     const initialRef = React.useRef(null)
     const { isOpen: isOpenDelete, onOpen: onOpenDelete, onClose: onCloseDelete } = useDisclosure()
@@ -56,6 +67,35 @@ function UAppointment({ id, personId, datetime, hours, total, request, status,ad
         headers: myHeaders,
         body: raw,
     };
+    const ispayed = async (e) => {
+        if(name ==="" || number==="" || date===""|| cvc===""){
+            toast({
+                title: "Please fill all the fields",
+                status: 'error',
+                duration: 1000,
+                isClosable: true,
+                position: 'top',
+            })
+        }
+else{
+
+        const request = await fetch("/api/v1/appointment/paid/" + id, {
+            method: 'POST',
+            headers: myHeaders
+        });
+        const data = await request.json();
+        if (data.status === 200) {
+            toast({
+                title: data.message,
+                status: 'success',
+                duration: 2000,
+                isClosable: true,
+                position: 'top',
+                onCloseComplete: (() => window.location.reload()),
+            })
+        }
+    }
+    }
     const AddReview = async (e) => {
         console.log(review);
         console.log(rate);
@@ -69,7 +109,7 @@ function UAppointment({ id, personId, datetime, hours, total, request, status,ad
                 status: 'success',
                 duration: 2000,
                 isClosable: true,
-                position:'top',
+                position: 'top',
                 onCloseComplete: (() => window.location.reload()),
             })
         }
@@ -80,7 +120,7 @@ function UAppointment({ id, personId, datetime, hours, total, request, status,ad
                 status: 'error',
                 duration: 2000,
                 isClosable: true,
-                position:'top',
+                position: 'top',
                 onCloseComplete: (() => window.location.reload()),
             })
         }
@@ -111,7 +151,7 @@ function UAppointment({ id, personId, datetime, hours, total, request, status,ad
                 status: 'success',
                 duration: 2000,
                 isClosable: true,
-                position:'top',
+                position: 'top',
                 onCloseComplete: (() => window.location.reload()),
             })
         }
@@ -122,7 +162,7 @@ function UAppointment({ id, personId, datetime, hours, total, request, status,ad
                 status: 'error',
                 duration: 2000,
                 isClosable: true,
-                position:'top',
+                position: 'top',
                 onCloseComplete: (() => window.location.reload()),
             })
         }
@@ -132,6 +172,7 @@ function UAppointment({ id, personId, datetime, hours, total, request, status,ad
             <Td>{username}</Td>
             <Td>{datetime.substring(0, 10)}</Td>
             <Td>{datetime.substring(11)}</Td>
+            <Td>{location}</Td>
             <Td>{hours}</Td>
             <Td>{total}</Td>
             {
@@ -175,13 +216,90 @@ function UAppointment({ id, personId, datetime, hours, total, request, status,ad
                             </AlertDialogOverlay>
                         </AlertDialog></Td>
                 </>
-                ) : ([status === "confirmed" ? (<Td><Heading as='h5' size='sm' color="teal">
-                    Confirmed </Heading></Td>) : (<><Td><Heading as='h5' size='sm' color="teal">
+                ) : ([status === "confirmed" && payed ? (<Td><Heading as='h5' size='sm' color="teal">
+                    Confirmed </Heading></Td>) : ([status === "confirmed" && !payed ? (<><Td> <Button colorScheme='orange' variant='outline' size="sm"
+                        onClick={onOpenPay}
+                    >
+                        Pay Now
+                    </Button></Td>
+                        <Modal
+                            initialFocusRef={initialRef}
+                            finalFocusRef={finalRef}
+                            isOpen={isOpenPay}
+                            onClose={onClosePay}
+                        >
+                            <ModalOverlay />
+                            <ModalContent>
+                                <ModalCloseButton />
+                                <ModalBody pb={6} textAlign="center">
+                                    <FormControl mt={4}>
+                                        <FormLabel>PAYMENT</FormLabel>
+                                        <Image
+                                            w="50%"
+                                            src={payment}
+                                            alt="payment"
+                                        />
+                                    </FormControl>
+                                    <FormControl mt={2}>
+                                        <FormLabel>Card number</FormLabel>
+                                        <Input
+                                         onChange={handleNumber}
+                                         value={number}
+                                            size='sm'
+                                        />
+                                    </FormControl>
+                                    
+                                    <FormControl mt={2}>
+                                        <FormLabel>Cardholders name</FormLabel>
+                                        <Input
+                                        onChange={handleName}
+                                        value={name}
+                                            size='sm'
+                                        />
+
+                                    </FormControl>
+
+                                    <FormControl mt={1}>
+                                        <HStack>
+                                            <VStack spacing="1" align="left" width={"20%"} >
+
+                                                <FormLabel>CVC</FormLabel>
+                                                <Input
+                                                onChange={handleCvc}
+                                                value={cvc}
+                                                    type="password"
+                                                    size='sm'
+                                                /></VStack> <VStack spacing="1" align="left" width={"40%"}>
+
+                                                <FormLabel>Expires on</FormLabel>
+
+                                                <Input type="month" id="start" 
+                                                onChange={handleDate}
+                                                value={date}
+                                                name="start" size="sm"
+                                                    min={new Date().toISOString().slice(0, 16)}
+                                                />
+                                            </VStack>
+                                        </HStack>
+
+                                    </FormControl>
+                                </ModalBody>
+
+                                <ModalFooter>
+                                    <Button colorScheme='blue' mr={3} onClick={ispayed}>
+                                        Pay
+                                    </Button>
+                                    <Button onClick={onClosePay}>Cancel</Button>
+                                </ModalFooter>
+                            </ModalContent>
+                        </Modal>
+
+                    </>) : (<><Td><Heading as='h5' size='sm' color="teal">
                         Completed </Heading></Td> {addReviews ? (<Td> <Button colorScheme='teal' variant='outline' size="sm"
                             onClick={onOpenReview}
                         >
                             Add Review
-                        </Button></Td>) : (<></>)}</>)]
+                        </Button></Td>) : (<></>)}</>)])]
                 )])
             }
             <Modal

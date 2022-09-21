@@ -32,9 +32,12 @@ function Appointment() {
         justifyItems: `center`
     };
     const [date, setDate] = useState("");
+    const [location, setLocation] = useState("");
+
     const [details, setDetails] = useState("");
     const [hour, setHour] = useState(1);
     const handleDateChange = (event) => setDate(event.target.value)
+    const handleLocationChange = (event) => setLocation(event.target.value)
     const handleDetailsChange = (event) => setDetails(event.target.value)
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -43,7 +46,8 @@ function Appointment() {
         "username": provider,
         "hours": hour,
         "date": date,
-        "request": details
+        "request": details,
+        "location":location
     });
 
     var requestOptions = {
@@ -138,6 +142,12 @@ function Appointment() {
                             style={{ ...stepperButtonStyles }}
                         />
                     </NumberInput>
+                    <Text mb="5px">Location:</Text>
+                    <Input
+                        size="md"
+                        value={location}
+                        onChange={handleLocationChange}
+                    />
                     <Text mb="5px">Request Details:</Text>
                     <Textarea onChange={handleDetailsChange} value={details}/>
                     <HStack

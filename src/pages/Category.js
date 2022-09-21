@@ -43,7 +43,7 @@ function Category({ category }) {
       <Heading as='h3' size='lg' color='teal' >
         {category}  Category
       </Heading>
-      <Button color='gray'  colorScheme='yellow'marginLeft='90%' marginBottom={30}  onClick={onOpen}>SEARCH</Button>
+      <Button color='black'  colorScheme='yellow'marginLeft='6%' marginBottom={30}  onClick={onOpen}>SEARCH</Button>
      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

@@ -88,7 +88,7 @@ import {
       <Image boxSize="90px" src={logo} alt="brand" />
       </Link>
       <Spacer/>
-      <HashLink to={'/#Categories'} align="left" ml="100rem" marginLeft={"100rem"}>
+      <HashLink to={'/#Categories'} align="left" ml="100rem">
       <Text fontSize='xl' >Categories</Text>
     </HashLink>
     </HStack>

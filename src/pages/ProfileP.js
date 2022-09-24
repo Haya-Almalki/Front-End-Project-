@@ -17,6 +17,7 @@ const ProfileP =()=>{
   const { username } = useParams();
   const [provider,setProvider]=useState()
   const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
   const [reviewList,setReviewList]=useState()
 
 
@@ -40,6 +41,7 @@ const ProfileP =()=>{
 
 
   useEffect(() => {
+    setLoading2(true)
     const fetchReviews = async () => {
       setLoading(true);
       const request = await fetch('/api/v1/review/reviewByPerson/'+username);
@@ -47,7 +49,7 @@ const ProfileP =()=>{
       if (request.status === 200) {
         console.log(data);
         setReviewList(data)
-        setLoading(false);
+        setLoading2(false);
       }
     };
     fetchReviews();
@@ -69,7 +71,7 @@ return(
   <Heading >
         <Navbar />
       </Heading>
-  {loading ? (
+  {loading || loading2 ? (
         <Spinner
           thickness="4px"
           speed="0.65s"

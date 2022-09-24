@@ -329,6 +329,7 @@ return(
             <VStack width={['90%', '90%', '100']} spacing="3" align="left">
             <Text >catagory:</Text>
             <Select placeholder='Art'value={category} onChange={categoryChange} >
+            <option value='Patient Assistant'>Patient Assistant</option>
             <option value='Tutoring'>Tutoring</option>
             <option value='Gaming'>Gaming</option>
             <option value='Travelling'>Travelling</option>

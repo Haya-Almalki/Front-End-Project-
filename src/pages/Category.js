@@ -43,19 +43,18 @@ function Category({ category }) {
       <Heading as='h3' size='lg' color='teal' >
         {category}  Category
       </Heading>
-      <Button color='black'  colorScheme='yellow'marginLeft='6%' marginBottom={30}  onClick={onOpen}>SEARCH</Button>
+      <Button color='black'  colorScheme='yellow'ml='6%' marginBottom={30}  onClick={onOpen}>SEARCH</Button>
      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Filtering data </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-           <Heading as='h5' size='sm'>you can filter data by the name of provider or by what 
-            you want from him or by the City he live in </Heading>
+           <Heading as='h5' size='sm'>you can search by username or description or city</Heading>
             <br/>
             <Input type='text' placeholder='search' backgroundColor='white' focusBorderColor='red' onChange={(e) => setQuery(e.target.value)} />   
       <Select  onChange={e=> setCitys(e.target.value)} >
-        <option value="">All City</option>
+        <option value="">Any City</option>
 {SA.cities.map((city,index) => (
 <option key={index} value={city}>
 {city}

@@ -225,7 +225,7 @@ const Register = () => {
   const fileSelected = async (e)=>{
     var form = new FormData();
     form.append('image', e.target.files[0])
-    const request = await fetch("https://api.imgbb.com/1/upload?key=e82fd60d23ac4565290f5a3dce0e69cf",{
+    const request = await fetch("https://api.imgbb.com/1/upload?key=aee3c853d0e394e291c9d032debb75dc",{
       method: 'POST',
       body:form
     });    
@@ -238,7 +238,7 @@ const Register = () => {
   const fileSelected1 = async (e)=>{
     var form = new FormData();
     form.append('image', e.target.files[0])
-    const request = await fetch("https://api.imgbb.com/1/upload?key=e82fd60d23ac4565290f5a3dce0e69cf",{
+    const request = await fetch("https://api.imgbb.com/1/upload?key=aee3c853d0e394e291c9d032debb75dc",{
       method: 'POST',
       body:form
     });    
